@@ -620,7 +620,7 @@ a.vs-contact-info-value:hover { color:var(--vs-teal); }
     padding-top: 13px !important;
     padding-bottom: 13px !important;
     border-radius:999px !important;
-    min-height: 48px !important;
+    min-height: 58px !important;
   }
 }
 
