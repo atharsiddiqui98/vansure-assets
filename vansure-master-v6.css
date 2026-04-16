@@ -617,8 +617,8 @@ a.vs-contact-info-value:hover { color:var(--vs-teal); }
 @media (max-width: 767px) {
   .vs-hero-ctas .vs-btn,
   .vs-page-hero-actions .vs-btn {
-    padding-top: 28px !important;
-    padding-bottom: 18px !important;
+    padding-top: 50px !important;
+    padding-bottom: 8px !important;
     border-radius:999px !important;
     min-height: 58px !important;
     font-size:.45rem!important;
