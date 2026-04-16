@@ -232,7 +232,7 @@
 .vs-product-text  { font-size:13px; color:var(--vs-body); line-height:1.6; transition:color .2s ease; }
 .vs-product-card:hover .vs-product-text { color:rgba(255,255,255,.68); }
 .vs-product-link  { margin-top:8px; font-size:13px; font-weight:600; color:var(--vs-teal-dark); text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:gap .18s ease,color .2s ease;!important; }
-.vs-product-card:hover .vs-product-link { color:var(--vs-teal); gap:9px;!important; }
+.vs-product-card:hover .vs-product-link { color:var(--vs-teal); gap:9px;!important;}
 
 /* ============================================================
    HOMEPAGE — WHY VANSURE
