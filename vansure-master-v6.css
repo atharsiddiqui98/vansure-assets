@@ -619,6 +619,7 @@ a.vs-contact-info-value:hover { color:var(--vs-teal); }
   .vs-page-hero-actions .vs-btn {
     padding-top: 13px !important;
     padding-bottom: 13px !important;
+    border-radius:999px !important;
     min-height: 48px !important;
   }
 }
