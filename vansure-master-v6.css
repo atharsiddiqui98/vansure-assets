@@ -614,6 +614,14 @@ a.vs-contact-info-value:hover { color:var(--vs-teal); }
 @media (max-width:480px) {
   .vs-hero-title,.vs-page-hero h1,.vs-about-hero h1,.vs-contact-hero h1 { font-size:1.75rem!important; }
 }
+@media (max-width: 767px) {
+  .vs-hero-ctas .vs-btn,
+  .vs-page-hero-actions .vs-btn {
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+    min-height: 48px !important;
+  }
+}
 
 /* ============================================================
    NAV MOBILE
