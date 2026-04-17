@@ -8,7 +8,7 @@
    - Nav
    - Buttons
    - Scroll reveal
-   - LOCKED HERO SYSTEM (inject hero across all pages)
+   - LOCKED HERO SYSTEM (favorite inject hero)
 ============================================================ */
 
 /* ── FONTS ── */
@@ -285,7 +285,7 @@
 
 /* ============================================================
    HERO — LOCKED VANSURE HERO SYSTEM
-   Source of truth: Condo hero
+   Source of truth: favorite tenant/product hero
 ============================================================ */
 .vs-hero-v2,
 .vs-page-hero,
@@ -294,11 +294,9 @@
 .vs-faq-hero {
   position: relative;
   overflow: hidden;
-  border-radius: 0 0 40px 40px;
-  background: radial-gradient(circle at 100% 0%, #00c4b7 0%, #00a59d 32%, #0f9d94 65%, #0b7a77 100%);
-  background-size: 200% 200%;
-  animation: vsHeroShimmer 8s ease-in-out infinite;
+  background: radial-gradient(circle at top right, #1ad7cb 0%, #00a59d 35%, #0f8e89 62%, #20334c 100%);
   color: #fff;
+  border-radius: 0 0 40px 40px;
 }
 
 .vs-hero-v2::before,
@@ -308,11 +306,11 @@
 .vs-faq-hero::before {
   content: "";
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 340px;
+  height: 340px;
   border-radius: 50%;
-  background: rgba(255,255,255,.05);
-  top: -110px;
+  background: rgba(255,255,255,.06);
+  top: -90px;
   right: -80px;
   pointer-events: none;
 }
@@ -327,16 +325,10 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: rgba(255,255,255,.04);
-  bottom: -70px;
-  left: -60px;
+  background: rgba(255,255,255,.05);
+  bottom: -80px;
+  left: -70px;
   pointer-events: none;
-}
-
-@keyframes vsHeroShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* ── HOMEPAGE HERO ── */
@@ -409,7 +401,6 @@
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
-  margin-bottom: 0;
 }
 
 .vs-hero-badge-dot {
@@ -794,7 +785,10 @@
 }
 
 .vs-hero-subtitle,
-.vs-page-hero-sub {
+.vs-page-hero-sub,
+.vs-about-hero p,
+.vs-contact-hero p,
+.vs-faq-hero p {
   animation: vsSlideUp .65s .16s var(--vs-ease) both;
 }
 
@@ -827,6 +821,7 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
 /* ============================================================
    RESPONSIVE HERO + NAV MOBILE
 ============================================================ */
@@ -888,15 +883,14 @@
     word-break: break-word !important;
   }
 
-.vs-hero-subtitle,
-.vs-page-hero-sub,
-.vs-about-hero p,
-.vs-contact-hero p,
-.vs-faq-hero p {
-  font-size: .93rem !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-
+  .vs-hero-subtitle,
+  .vs-page-hero-sub,
+  .vs-about-hero p,
+  .vs-contact-hero p,
+  .vs-faq-hero p {
+    font-size: .93rem !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
   }
 
   .vs-hero-ctas,
@@ -908,14 +902,14 @@
   .vs-page-hero-points {
     justify-content: center;
   }
+
   .vs-hero-badge,
-.vs-page-hero-badge,
-.vs-about-hero-badge,
-.vs-contact-hero-badge,
-.vs-faq-hero-badge {
-  font-size: .65rem !important;
-  white-space: normal !important;
-  
+  .vs-page-hero-badge,
+  .vs-about-hero-badge,
+  .vs-contact-hero-badge,
+  .vs-faq-hero-badge {
+    font-size: .65rem !important;
+    white-space: normal !important;
   }
 
   .vs-hero-visual,
@@ -930,6 +924,7 @@
     text-align: center;
   }
 }
+
 @media (max-width:480px) {
   .vs-hero-title,
   .vs-page-hero h1,
@@ -937,9 +932,6 @@
   .vs-contact-hero h1,
   .vs-faq-hero h1 {
     font-size: 1.75rem !important;
-  }
-}
-
   }
 }
 
