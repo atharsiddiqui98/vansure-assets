@@ -8,7 +8,7 @@
    - Nav
    - Buttons
    - Scroll reveal
-   - LOCKED HERO SYSTEM (favorite inject hero)
+   - LOCKED HERO SYSTEM (inject hero across all pages)
 ============================================================ */
 
 /* ── FONTS ── */
@@ -285,7 +285,6 @@
 
 /* ============================================================
    HERO — LOCKED VANSURE HERO SYSTEM
-   Favorite inject hero
 ============================================================ */
 .vs-hero-v2,
 .vs-page-hero,
@@ -294,9 +293,11 @@
 .vs-faq-hero {
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at top right, #1ad7cb 0%, #00a59d 35%, #0f8e89 62%, #20334c 100%);
+  border-radius: 0 0 48px 48px;
+  background: radial-gradient(circle at 100% 0%, #00c4b7 0%, #00a59d 32%, #0f9d94 65%, #0b7a77 100%);
+  background-size: 200% 200%;
+  animation: vsHeroShimmer 9s ease-in-out infinite;
   color: #fff;
-  border-radius: 0 0 40px 40px;
 }
 
 .vs-hero-v2::before,
@@ -306,11 +307,11 @@
 .vs-faq-hero::before {
   content: "";
   position: absolute;
-  width: 340px;
-  height: 340px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
-  background: rgba(255,255,255,.06);
-  top: -90px;
+  background: rgba(255,255,255,.05);
+  top: -100px;
   right: -80px;
   pointer-events: none;
 }
@@ -325,10 +326,16 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: rgba(255,255,255,.05);
-  bottom: -80px;
-  left: -70px;
+  background: rgba(255,255,255,.04);
+  bottom: -70px;
+  left: -60px;
   pointer-events: none;
+}
+
+@keyframes vsHeroShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* ── HOMEPAGE HERO ── */
@@ -337,10 +344,10 @@
   z-index: 2;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 76px 20px 92px;
+  padding: 76px 24px 96px;
   display: grid;
-  grid-template-columns: minmax(0,1.1fr) minmax(0,.95fr);
-  gap: 38px;
+  grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+  gap: 56px;
   align-items: center;
 }
 
@@ -365,10 +372,10 @@
   z-index: 2;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 76px 20px 92px;
+  padding: 80px 24px 104px;
   display: grid;
   grid-template-columns: minmax(0,1.1fr) minmax(0,.95fr);
-  gap: 38px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -380,11 +387,11 @@
   margin: 0 auto;
   position: relative;
   z-index: 5;
-  padding: 76px 20px 92px;
+  padding: 80px 24px 96px;
   text-align: center;
 }
 
-/* ── BADGES ── */
+/* ── BADGE ── */
 .vs-hero-badge,
 .vs-page-hero-badge,
 .vs-about-hero-badge,
@@ -392,23 +399,25 @@
 .vs-faq-hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
+  gap: 8px;
+  padding: 6px 14px;
   border-radius: 999px;
   background: rgba(6,27,37,.18);
-  color: #fff;
-  font-size: 12px;
+  border: 1px solid rgba(255,255,255,.25);
+  font-size: .72rem;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: .13em;
   text-transform: uppercase;
+  color: rgba(255,255,255,.95);
+  margin-bottom: 20px;
 }
 
 .vs-hero-badge-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #dffef8;
-  box-shadow: 0 0 0 6px rgba(255,255,255,.12);
+  box-shadow: 0 0 0 5px rgba(255,255,255,.12);
 }
 
 /* ── HERO HEADINGS ── */
@@ -417,12 +426,13 @@
 .vs-about-hero h1,
 .vs-contact-hero h1,
 .vs-faq-hero h1 {
-  font-size: clamp(40px,5vw,60px) !important;
+  font-size: clamp(2.9rem,5vw,5rem) !important;
+  font-weight: 800 !important;
   line-height: 1.02 !important;
-  font-weight: 700 !important;
-  margin: 18px 0 16px !important;
   color: #fff !important;
-  max-width: 700px;
+  margin: 0 0 18px !important;
+  letter-spacing: -.02em;
+  max-width: 720px;
 }
 
 .vs-about-hero h1,
@@ -436,10 +446,10 @@
 .vs-about-hero p,
 .vs-contact-hero p,
 .vs-faq-hero p {
-  font-size: 17px !important;
-  line-height: 1.75 !important;
-  color: rgba(255,255,255,.88) !important;
-  max-width: 590px !important;
+  font-size: 1.04rem !important;
+  line-height: 1.72 !important;
+  color: rgba(237,245,255,.9) !important;
+  max-width: 48rem !important;
   margin: 0 !important;
 }
 
@@ -454,8 +464,8 @@
 .vs-page-hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+  gap: .9rem;
+  margin: 1.8rem 0 1.4rem;
 }
 
 /* ── HERO CHECKLIST ── */
@@ -463,10 +473,10 @@
 .vs-page-hero-points {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 18px;
+  gap: 10px 20px;
   list-style: none;
   padding: 0;
-  margin: 26px 0 0;
+  margin: 18px 0 0;
 }
 
 .vs-hero-list-item,
@@ -474,21 +484,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
-  color: rgba(255,255,255,.92);
+  font-size: .84rem;
+  font-weight: 500;
+  color: rgba(234,246,252,.92);
 }
 
 .vs-hero-list-icon,
 .vs-page-hero-check {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.4);
+  background: rgba(255,255,255,.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,.35);
-  font-size: 12px;
-  background: transparent;
+  font-size: .65rem;
   flex-shrink: 0;
 }
 
@@ -747,10 +758,7 @@
 }
 
 .vs-hero-subtitle,
-.vs-page-hero-sub,
-.vs-about-hero p,
-.vs-contact-hero p,
-.vs-faq-hero p {
+.vs-page-hero-sub {
   animation: vsSlideUp .65s .16s var(--vs-ease) both;
 }
 
@@ -770,18 +778,18 @@
 }
 
 @keyframes vsSlideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px) }
+  to { opacity: 1; transform: translateY(0) }
 }
 
 @keyframes vsCardIn {
-  from { opacity: 0; transform: translateY(24px) scale(.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(24px) scale(.97) }
+  to { opacity: 1; transform: translateY(0) scale(1) }
 }
 
 @keyframes vsFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0 }
+  to { opacity: 1 }
 }
 
 /* ============================================================
@@ -813,15 +821,18 @@
   .vs-about-hero,
   .vs-contact-hero,
   .vs-faq-hero {
-    border-radius: 0 0 30px 30px;
+    border-radius: 0 0 32px 32px;
   }
 
-  .vs-hero-inner-new,
+  .vs-hero-inner-new {
+    padding: 52px 20px 68px !important;
+  }
+
   .vs-page-hero-inner,
   .vs-about-hero-inner,
   .vs-contact-hero-inner,
   .vs-faq-hero-inner {
-    padding: 58px 20px 82px;
+    padding: 64px 20px 78px;
   }
 
   .vs-hero-inner-new {
@@ -841,7 +852,8 @@
   .vs-about-hero h1,
   .vs-contact-hero h1,
   .vs-faq-hero h1 {
-    font-size: 40px !important;
+    font-size: clamp(2.2rem,9vw,3.4rem) !important;
+    line-height: 1.08 !important;
     word-break: break-word !important;
   }
 
@@ -850,9 +862,8 @@
   .vs-about-hero p,
   .vs-contact-hero p,
   .vs-faq-hero p {
-    font-size: .93rem !important;
+    font-size: .98rem !important;
     max-width: 100% !important;
-    margin: 0 auto !important;
   }
 
   .vs-hero-ctas,
@@ -891,8 +902,7 @@
   .vs-hero-title,
   .vs-page-hero h1,
   .vs-about-hero h1,
-  .vs-contact-hero h1,
-  .vs-faq-hero h1 {
+  .vs-contact-hero h1 {
     font-size: 1.75rem !important;
   }
 }
