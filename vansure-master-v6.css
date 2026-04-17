@@ -285,6 +285,7 @@
 
 /* ============================================================
    HERO — LOCKED VANSURE HERO SYSTEM
+   Source of truth: Condo hero
 ============================================================ */
 .vs-hero-v2,
 .vs-page-hero,
@@ -293,10 +294,10 @@
 .vs-faq-hero {
   position: relative;
   overflow: hidden;
-  border-radius: 0 0 48px 48px;
+  border-radius: 0 0 40px 40px;
   background: radial-gradient(circle at 100% 0%, #00c4b7 0%, #00a59d 32%, #0f9d94 65%, #0b7a77 100%);
   background-size: 200% 200%;
-  animation: vsHeroShimmer 9s ease-in-out infinite;
+  animation: vsHeroShimmer 8s ease-in-out infinite;
   color: #fff;
 }
 
@@ -311,7 +312,7 @@
   height: 380px;
   border-radius: 50%;
   background: rgba(255,255,255,.05);
-  top: -100px;
+  top: -110px;
   right: -80px;
   pointer-events: none;
 }
@@ -344,10 +345,10 @@
   z-index: 2;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 76px 24px 96px;
+  padding: 76px 20px 92px;
   display: grid;
-  grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr);
-  gap: 56px;
+  grid-template-columns: minmax(0,1.1fr) minmax(0,.95fr);
+  gap: 38px;
   align-items: center;
 }
 
@@ -366,21 +367,49 @@
   min-width: 0;
 }
 
-.vs-hero-badge {
+/* ── PRODUCT PAGE HERO ── */
+.vs-page-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 76px 20px 92px;
+  display: grid;
+  grid-template-columns: minmax(0,1.1fr) minmax(0,.95fr);
+  gap: 38px;
+  align-items: center;
+}
+
+/* ── ABOUT / CONTACT / FAQ HERO ── */
+.vs-about-hero-inner,
+.vs-contact-hero-inner,
+.vs-faq-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  padding: 76px 20px 92px;
+  text-align: center;
+}
+
+/* ── BADGES ── */
+.vs-hero-badge,
+.vs-page-hero-badge,
+.vs-about-hero-badge,
+.vs-contact-hero-badge,
+.vs-faq-hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
-  padding: .32rem 1rem;
+  gap: 10px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(8,37,54,.26);
-  border: 1px solid rgba(255,255,255,.14);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .13em;
+  background: rgba(6,27,37,.18);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.95);
-  margin-bottom: 20px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  margin-bottom: 0;
 }
 
 .vs-hero-badge-dot {
@@ -388,73 +417,101 @@
   height: 8px;
   border-radius: 50%;
   background: #dffef8;
-  box-shadow: 0 0 0 6px rgba(255,255,255,.10);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.12);
 }
 
-.vs-hero-title {
-  font-size: clamp(4rem,5.4vw,5.6rem) !important;
-  line-height: .98 !important;
-  font-weight: 800 !important;
+/* ── HERO HEADINGS ── */
+.vs-hero-title,
+.vs-page-hero h1,
+.vs-about-hero h1,
+.vs-contact-hero h1,
+.vs-faq-hero h1 {
+  font-size: clamp(40px,5vw,60px) !important;
+  line-height: 1.02 !important;
+  font-weight: 700 !important;
+  margin: 18px 0 16px !important;
   color: #fff !important;
-  margin: 0 0 20px !important;
-  max-width: 760px;
-  letter-spacing: -.035em;
+  max-width: 700px;
 }
 
-.vs-hero-subtitle {
-  font-size: 1.06rem !important;
-  line-height: 1.7 !important;
-  color: rgba(240,248,255,.90) !important;
-  max-width: 34rem !important;
+.vs-about-hero h1,
+.vs-contact-hero h1,
+.vs-faq-hero h1 {
+  max-width: none;
+}
+
+.vs-hero-subtitle,
+.vs-page-hero-sub,
+.vs-about-hero p,
+.vs-contact-hero p,
+.vs-faq-hero p {
+  font-size: 17px !important;
+  line-height: 1.75 !important;
+  color: rgba(255,255,255,.88) !important;
+  max-width: 590px !important;
   margin: 0 !important;
 }
 
-.vs-hero-ctas {
+.vs-about-hero p,
+.vs-contact-hero p,
+.vs-faq-hero p {
+  margin: 0 auto !important;
+}
+
+/* ── HERO CTAs ── */
+.vs-hero-ctas,
+.vs-page-hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  margin: 32px 0 24px;
+  gap: 12px;
+  margin-top: 28px;
 }
 
-.vs-hero-list {
+/* ── HERO CHECKLIST ── */
+.vs-hero-list,
+.vs-page-hero-points {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 12px 18px;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 26px 0 0;
 }
 
-.vs-hero-list-item {
+.vs-hero-list-item,
+.vs-page-hero-points li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: .94rem;
-  font-weight: 600;
-  color: rgba(240,248,255,.94);
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255,255,255,.92);
 }
 
-.vs-hero-list-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.34);
-  background: rgba(18,37,54,.18);
+.vs-hero-list-icon,
+.vs-page-hero-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: .74rem;
+  border: 1px solid rgba(255,255,255,.35);
+  font-size: 12px;
+  background: transparent;
   flex-shrink: 0;
 }
 
+/* ── HOMEPAGE HERO CARD ── */
 .vs-hero-card {
   width: 100%;
-  max-width: 420px;
-  border-radius: 32px;
+  max-width: 410px;
   background: #fff;
-  padding: 20px 20px 22px;
-  box-shadow: 0 22px 50px rgba(7,27,53,.16);
   color: var(--vs-text);
+  border-radius: 32px;
+  box-shadow: var(--vs-shadow);
+  padding: 22px;
+  position: relative;
+  z-index: 2;
   transition: transform .3s var(--vs-ease), box-shadow .3s var(--vs-ease);
 }
 
@@ -463,12 +520,56 @@
   box-shadow: 0 28px 60px rgba(7,27,53,.18);
 }
 
-.vs-hero-photo {
-  border-radius: 22px;
-  overflow: hidden;
+.vs-hero-card-top,
+.vs-hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   margin-bottom: 16px;
+}
+
+.vs-hero-card-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vs-teal);
+  margin-bottom: 4px;
+}
+
+.vs-hero-card-title {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--vs-navy);
+  margin: 0;
+}
+
+.vs-hero-card-tag,
+.vs-hero-card-pill {
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: #047b63;
+  background: rgba(0,165,157,.10);
+  padding: 7px 10px;
+  border-radius: 999px;
+}
+
+.vs-hero-card-box {
+  background: linear-gradient(135deg,#f7fbff 0%, #edf8f7 100%);
+  border: 1px solid rgba(0,165,157,.10);
+  border-radius: 24px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.vs-hero-photo {
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  height: 210px;
   background: #eef3f7;
-  min-height: 210px;
+  margin-bottom: 16px;
 }
 
 .vs-hero-photo img {
@@ -478,60 +579,76 @@
   display: block;
 }
 
+.vs-hero-card-estimate {
+  padding-top: 2px;
+  text-align: center;
+}
+
+.vs-hero-card-price,
+.vs-page-hero-price {
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--vs-navy) !important;
+  margin: 0 0 10px;
+}
+
+.vs-hero-card-price {
+  text-align: center;
+}
+
+.vs-hero-card-price span,
+.vs-page-hero-price span {
+  font-size: 16px;
+  color: var(--vs-navy) !important;
+  font-weight: 600;
+  opacity: .72;
+}
+
+.vs-hero-card-copy,
+.vs-page-hero-card-copy {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--vs-navy) !important;
+  opacity: .72;
+  margin: 6px 0 0;
+}
+
+.vs-hero-card-copy {
+  text-align: center;
+}
+
 .vs-hero-pill-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: .35rem;
+  margin-bottom: 10px;
 }
 
 .vs-tag-pill {
-  padding: .2rem .62rem;
-  font-size: .74rem;
+  padding: .15rem .55rem;
+  font-size: .7rem;
   border-radius: 999px;
-  background: #eef3f2;
+  background: rgba(0,165,157,.09);
   color: var(--vs-teal-dark);
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
-}
-
-.vs-hero-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .75rem;
-  margin-bottom: 8px;
-}
-
-.vs-hero-card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--vs-navy);
-}
-
-.vs-hero-card-tag {
-  font-size: .76rem;
-  padding: .3rem .7rem;
-  border-radius: 999px;
-  background: rgba(5,166,125,.10);
-  color: #2d8d74;
-  white-space: nowrap;
-  font-weight: 600;
 }
 
 .vs-hero-card-meta {
-  font-size: .84rem;
-  line-height: 1.45;
+  font-size: .78rem;
   color: var(--vs-muted);
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
   margin-bottom: 10px;
 }
 
 .vs-hero-progress {
   width: 100%;
-  height: 8px;
+  height: 7px;
   border-radius: 999px;
-  background: #edf1f5;
+  background: #eef2f7;
   overflow: hidden;
 }
 
@@ -545,128 +662,6 @@
 @keyframes vsProgressIn {
   from { width: 0% }
   to { width: 74% }
-}
-
-/* ── PRODUCT PAGE HERO ── */
-.vs-page-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 80px 24px 104px;
-  display: grid;
-  grid-template-columns: minmax(0,1.1fr) minmax(0,.95fr);
-  gap: 48px;
-  align-items: center;
-}
-
-/* ── ABOUT / CONTACT / FAQ HERO ── */
-.vs-about-hero-inner,
-.vs-contact-hero-inner,
-.vs-faq-hero-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 5;
-  padding: 80px 24px 96px;
-  text-align: center;
-}
-
-/* ── BADGE ── */
-.vs-page-hero-badge,
-.vs-about-hero-badge,
-.vs-contact-hero-badge,
-.vs-faq-hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(6,27,37,.18);
-  border: 1px solid rgba(255,255,255,.25);
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.95);
-  margin-bottom: 20px;
-}
-
-/* ── HERO HEADINGS ── */
-.vs-page-hero h1,
-.vs-about-hero h1,
-.vs-contact-hero h1,
-.vs-faq-hero h1 {
-  font-size: clamp(2.9rem,5vw,5rem) !important;
-  font-weight: 800 !important;
-  line-height: 1.02 !important;
-  color: #fff !important;
-  margin: 0 0 18px !important;
-  letter-spacing: -.02em;
-  max-width: 720px;
-}
-
-.vs-about-hero h1,
-.vs-contact-hero h1,
-.vs-faq-hero h1 {
-  max-width: none;
-}
-
-.vs-page-hero-sub,
-.vs-about-hero p,
-.vs-contact-hero p,
-.vs-faq-hero p {
-  font-size: 1.04rem !important;
-  line-height: 1.72 !important;
-  color: rgba(237,245,255,.9) !important;
-  max-width: 48rem !important;
-  margin: 0 !important;
-}
-
-.vs-about-hero p,
-.vs-contact-hero p,
-.vs-faq-hero p {
-  margin: 0 auto !important;
-}
-
-/* ── HERO CTAs ── */
-.vs-page-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .9rem;
-  margin: 1.8rem 0 1.4rem;
-}
-
-/* ── HERO CHECKLIST ── */
-.vs-page-hero-points {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  list-style: none;
-  padding: 0;
-  margin: 18px 0 0;
-}
-
-.vs-page-hero-points li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: .84rem;
-  font-weight: 500;
-  color: rgba(234,246,252,.92);
-}
-
-.vs-page-hero-check {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.4);
-  background: rgba(255,255,255,.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .65rem;
-  flex-shrink: 0;
 }
 
 /* ── PRODUCT PAGE HERO CARD ── */
@@ -727,29 +722,6 @@
   border-radius: 24px;
   padding: 18px;
   margin-bottom: 14px;
-}
-
-.vs-page-hero-price {
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 700;
-  color: var(--vs-navy);
-  margin: 0 0 10px;
-}
-
-.vs-page-hero-price span {
-  font-size: 16px;
-  color: var(--vs-navy);
-  font-weight: 600;
-  opacity: .72;
-}
-
-.vs-page-hero-card-copy {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--vs-navy);
-  opacity: .72;
-  margin: 6px 0 0;
 }
 
 .vs-page-hero-meta {
@@ -842,20 +814,19 @@
 }
 
 @keyframes vsSlideUp {
-  from { opacity: 0; transform: translateY(16px) }
-  to { opacity: 1; transform: translateY(0) }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes vsCardIn {
-  from { opacity: 0; transform: translateY(24px) scale(.97) }
-  to { opacity: 1; transform: translateY(0) scale(1) }
+  from { opacity: 0; transform: translateY(24px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes vsFadeIn {
-  from { opacity: 0 }
-  to { opacity: 1 }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 /* ============================================================
    RESPONSIVE HERO + NAV MOBILE
 ============================================================ */
@@ -885,13 +856,20 @@
   .vs-about-hero,
   .vs-contact-hero,
   .vs-faq-hero {
-    border-radius: 0 0 32px 32px;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .vs-hero-inner-new,
+  .vs-page-hero-inner,
+  .vs-about-hero-inner,
+  .vs-contact-hero-inner,
+  .vs-faq-hero-inner {
+    padding: 58px 20px 82px;
   }
 
   .vs-hero-inner-new {
     grid-template-columns: 1fr !important;
-    padding: 52px 20px 68px !important;
-    text-align: left !important;
+    text-align: center !important;
     gap: 0 !important;
   }
 
@@ -906,76 +884,62 @@
   .vs-about-hero h1,
   .vs-contact-hero h1,
   .vs-faq-hero h1 {
-    font-size: clamp(2.2rem,9vw,3.4rem) !important;
-    line-height: 1.08 !important;
+    font-size: 40px !important;
     word-break: break-word !important;
   }
 
-  .vs-hero-title {
-    font-size: 2.35rem !important;
-    line-height: 1.04 !important;
-    max-width: 100% !important;
+.vs-hero-subtitle,
+.vs-page-hero-sub,
+.vs-about-hero p,
+.vs-contact-hero p,
+.vs-faq-hero p {
+  font-size: .93rem !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+
   }
 
-  .vs-hero-subtitle,
-  .vs-page-hero-sub,
-  .vs-about-hero p,
-  .vs-contact-hero p,
-  .vs-faq-hero p {
-    font-size: .98rem !important;
-    max-width: 100% !important;
-  }
-
-  .vs-hero-subtitle {
-    font-size: .96rem !important;
-    margin: 0 !important;
-  }
-
-  .vs-page-hero-inner,
-  .vs-about-hero-inner,
-  .vs-contact-hero-inner,
-  .vs-faq-hero-inner {
-    padding: 64px 20px 78px;
-    text-align: center;
-  }
-
-  .vs-hero-ctas {
-    justify-content: flex-start !important;
-  }
-
+  .vs-hero-ctas,
   .vs-page-hero-actions {
     justify-content: center;
   }
 
-  .vs-hero-list {
-    align-items: flex-start !important;
-  }
-
+  .vs-hero-list,
   .vs-page-hero-points {
     justify-content: center;
   }
-
   .vs-hero-badge,
-  .vs-page-hero-badge,
-  .vs-about-hero-badge,
-  .vs-contact-hero-badge,
-  .vs-faq-hero-badge {
-    font-size: .65rem !important;
-    white-space: normal !important;
+.vs-page-hero-badge,
+.vs-about-hero-badge,
+.vs-contact-hero-badge,
+.vs-faq-hero-badge {
+  font-size: .65rem !important;
+  white-space: normal !important;
+  
   }
 
   .vs-hero-visual,
   .vs-page-hero-card-wrap {
     display: none !important;
   }
-}
 
+  .vs-page-hero-inner,
+  .vs-about-hero-inner,
+  .vs-contact-hero-inner,
+  .vs-faq-hero-inner {
+    text-align: center;
+  }
+}
 @media (max-width:480px) {
   .vs-hero-title,
   .vs-page-hero h1,
   .vs-about-hero h1,
-  .vs-contact-hero h1 {
+  .vs-contact-hero h1,
+  .vs-faq-hero h1 {
     font-size: 1.75rem !important;
+  }
+}
+
   }
 }
 
@@ -1021,7 +985,7 @@
     padding: 0;
   }
 }
-}
+
 /* ============================================================
    VANSURE — MASTER CSS v7
    PART 2/3
