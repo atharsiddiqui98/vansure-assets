@@ -8,8 +8,7 @@
    - Nav
    - Buttons
    - Scroll reveal
-   - LOCKED HERO SYSTEM
-   - Hero load animations
+   - LOCKED HERO SYSTEM (inject hero across all pages)
 ============================================================ */
 
 /* ── FONTS ── */
@@ -814,17 +813,9 @@
   .vs-page-hero-chip-stack {
     display: none;
   }
-
 }
 
 @media (max-width:767px) {
-  .vs-hero-v2,
-  .vs-page-hero,
-  .vs-about-hero,
-  .vs-contact-hero,
-  .vs-faq-hero {
-    border-radius: 0 0 30px 30px;
-  }
   .vs-hero-v2,
   .vs-page-hero,
   .vs-about-hero,
@@ -905,6 +896,7 @@
   .vs-faq-hero-inner {
     text-align: center;
   }
+}
 
 @media (max-width:480px) {
   .vs-hero-title,
@@ -1165,7 +1157,6 @@
   margin-top: 32px;
 }
 
-/* PRODUCT CARD LINK RESET */
 .vs-product-grid a,
 .vs-product-grid a:link,
 .vs-product-grid a:visited,
