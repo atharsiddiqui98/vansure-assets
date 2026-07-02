@@ -255,4 +255,97 @@ Every interaction should make customers feel:
 
 # 12. Master Prompt
 
-> Using the approved Vansure Vee reference images attached in this conversation as the canonical character reference, create the exact same Vee without redesigning or altering any permanent visual characteristics. Maintain identical helmet geometry, visor shape, facial features, armor proportions, cape, colors, materials, logos, and overall silhouette. Only change the requested pose, expression, accessories, clothing overlays, or held object. The final result must look like the same Vee photographed in a different moment—not a new character. Render in AAA-quality 3D realism with Pixar-level appeal, cinematic lighting, premium materials, transparent PNG background, and professional advertising quality.
+Using the approved Vansure Vee reference images attached in this conversation as the canonical character reference, create the exact same Vee.
+
+Preserve the approved character exactly.
+
+Do not redesign, reinterpret, simplify, or alter Vee’s identity in any way.
+
+Maintain identical:
+
+* Helmet geometry
+* Helmet proportions
+* Visor shape
+* Visor materials
+* Facial features
+* Eye shape
+* Smile style
+* Armor proportions
+* Shoulder armor
+* Gloves
+* Boots
+* Mechanical joints
+* Cape design
+* Vansure logos
+* Colors
+* Materials
+* Overall silhouette
+* Character personality
+
+The approved reference images always take priority over any written description.
+
+Any requested clothing, accessories, props, equipment, or held objects must be layered over or added to the existing character rather than replacing or modifying the core design.
+
+The final result should look like the exact same Vee photographed in a different moment, not a newly designed robot.
+
+Render in:
+
+* AAA-quality 3D realism
+* Pixar-quality character design
+* Disney-quality appeal
+* Cinematic game-quality rendering
+* Professional advertising quality
+* Physically accurate lighting
+* Soft cinematic studio lighting
+* Ultra-detailed premium materials
+* Crisp edges
+* Premium reflections
+
+Output requirements:
+
+* Transparent PNG
+* No background
+* No floor
+* No cast shadows extending outside the character
+* High resolution
+* Advertising-ready quality
+
+Vee should always appear:
+
+* Friendly
+* Trustworthy
+* Intelligent
+* Calm
+* Helpful
+* Professional
+* Confident
+* Family-friendly
+* Premium
+* Modern
+* Approachable
+
+Never make Vee appear:
+
+* Aggressive
+* Angry
+* Evil
+* Intimidating
+* Childish
+* Comedic
+* Cartoonish
+* Bulky
+* Cheap-looking
+
+Treat the attached reference images as the permanent source of truth. Every future render must preserve Vee’s identity exactly, changing only the requested pose, expression, accessories, clothing overlays, or scene.
+
+hen, for every new image, simply append the request.
+
+For example:
+
+* ”…Render Vee waving with his right hand.”
+* ”…Render Vee holding a laptop while pointing at a floating insurance policy.”
+* ”…Render Vee wearing a doctor’s coat over his armor for the Critical Illness Insurance page.”
+* ”…Render Vee wearing a white thobe over his armor for the Sharia-Compliant Life Insurance page.”
+* ”…Render Vee holding a modern smartphone displaying the Vansure mobile app.”
+
+This keeps the character locked while allowing virtually unlimited variations. I think this will give you the most consistent results as you build out the entire Vansure Vee library.
