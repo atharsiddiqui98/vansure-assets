@@ -32,7 +32,10 @@
   --vs-r-lg:        24px;
   --vs-r-md:        16px;
 }
-
+/* ── GLOBAL: prevent horizontal scroll/pan on mobile ── */
+html {
+  overflow-x: hidden;
+}
 [class^="vs-"],
 [class*=" vs-"] {
   box-sizing: border-box;
