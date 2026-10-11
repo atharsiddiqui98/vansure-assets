@@ -14,13 +14,16 @@ gsap.utils.toArray(R+'.vp2-cards,'+R+'.vp2-rows,'+R+'.vp2-steps,'+R+'.vp2-list,'
 window.addEventListener('load',function(){ScrollTrigger.refresh()});
 };
 
-/* Partners helpers: sticky mobile CTA and analytics events. Events go to gtag when it exists, otherwise to window.dataLayer, so they are picked up by Google Analytics or Tag Manager once either is installed. No analytics library is loaded here. */
+/* Page helpers. Partners pages: sticky mobile CTA and partner events. Tools hub: tool events. Events go to gtag when it exists, otherwise to window.dataLayer. No analytics library is loaded here and no form values are ever sent. */
 (function(){
 function ready(f){if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',f)}else{f()}}
+function send(name,p){try{if(typeof window.gtag==='function'){window.gtag('event',name,p)}else{window.dataLayer=window.dataLayer||[];p.event=name;window.dataLayer.push(p)}}catch(e){}}
 ready(function(){
 var root=document.querySelector('.vp2');if(!root)return;
+if(root.getAttribute('data-hub')==='tools'){tools(root);return}
+if(location.pathname.indexOf('/partners')!==0)return;
 var m=/^\/partners-([a-z-]+)/.exec(location.pathname),ptype=m?m[1]:'main';
-function track(name,p){p=p||{};p.partner_type=p.partner_type||ptype;try{if(typeof window.gtag==='function'){window.gtag('event',name,p)}else{window.dataLayer=window.dataLayer||[];p.event=name;window.dataLayer.push(p)}}catch(e){}}
+function track(name,p){p=p||{};p.partner_type=p.partner_type||ptype;send(name,p)}
 window.vp2Track=track;
 track('partner_page_view');
 var hero=root.querySelector('.vp2-hero'),heroCta=root.querySelector('.vp2-hero .vp2-a'),target=root.querySelector('.vp2-form')||root.querySelector('.vp2-close');
@@ -41,4 +44,14 @@ function ft(){return sel&&sel.value?sel.value:ptype}
 if(form){var started=false;form.addEventListener('focusin',function(){if(!started){started=true;track('partner_form_start',{partner_type:ft()})}})}
 if(done&&window.MutationObserver){var sent=false;new MutationObserver(function(){if(!sent&&done.style.display==='block'){sent=true;track('partner_form_submit',{partner_type:ft()})}}).observe(done,{attributes:true,attributeFilter:['style']})}
 });
+/* Tools hub: which tool was opened and from where, plus quote and advisor button clicks. */
+function tools(root){
+root.addEventListener('click',function(ev){
+var a=ev.target.closest?ev.target.closest('a'):null;if(!a||!root.contains(a))return;
+var sec=a.closest('[data-sec]'),loc=sec?sec.getAttribute('data-sec'):'page',kind=a.getAttribute('data-cta'),tool=a.getAttribute('data-tool');
+if(kind==='quote'){send('tool_quote_cta_click',{cta_location:loc,page_path:location.pathname})}
+else if(kind==='advisor'){send('tool_advisor_cta_click',{cta_location:loc,page_path:location.pathname})}
+else if(tool){var cat=a.closest('[data-cat]');send('tool_open',{tool_name:tool,tool_category:cat?cat.getAttribute('data-cat'):'',cta_location:loc,page_path:location.pathname})}
+});
+}
 })();
