@@ -13,3 +13,32 @@ gsap.utils.toArray(R+'.vp2-eye,'+R+'.vp2-h2,'+R+'.vp2-sub,'+R+'.vp2-call,'+R+'.v
 gsap.utils.toArray(R+'.vp2-cards,'+R+'.vp2-rows,'+R+'.vp2-steps,'+R+'.vp2-list,'+R+'.vp2-num').forEach(function(g){gsap.from(g.children,{y:26,autoAlpha:0,duration:.6,stagger:.07,ease:E,scrollTrigger:{trigger:g,start:'top 88%',once:true}})});
 window.addEventListener('load',function(){ScrollTrigger.refresh()});
 };
+
+/* Partners helpers: sticky mobile CTA and analytics events. Events go to gtag when it exists, otherwise to window.dataLayer, so they are picked up by Google Analytics or Tag Manager once either is installed. No analytics library is loaded here. */
+(function(){
+function ready(f){if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',f)}else{f()}}
+ready(function(){
+var root=document.querySelector('.vp2');if(!root)return;
+var m=/^\/partners-([a-z-]+)/.exec(location.pathname),ptype=m?m[1]:'main';
+function track(name,p){p=p||{};p.partner_type=p.partner_type||ptype;try{if(typeof window.gtag==='function'){window.gtag('event',name,p)}else{window.dataLayer=window.dataLayer||[];p.event=name;window.dataLayer.push(p)}}catch(e){}}
+window.vp2Track=track;
+track('partner_page_view');
+var hero=root.querySelector('.vp2-hero'),heroCta=root.querySelector('.vp2-hero .vp2-a'),target=root.querySelector('.vp2-form')||root.querySelector('.vp2-close');
+if(hero&&heroCta&&target){
+var s=document.createElement('a');s.className='vp2-sticky';s.href=heroCta.getAttribute('href');s.textContent='Become a Vansure Partner';s.setAttribute('data-vp2-cta','sticky');root.appendChild(s);
+var tick=false;function upd(){tick=false;var on=hero.getBoundingClientRect().bottom<0&&target.getBoundingClientRect().top>window.innerHeight;s.classList.toggle('vp2-on',on);if(on){s.removeAttribute('tabindex');s.removeAttribute('aria-hidden')}else{s.setAttribute('tabindex','-1');s.setAttribute('aria-hidden','true')}}
+function req(){if(!tick){tick=true;window.requestAnimationFrame(upd)}}
+window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
+}
+root.addEventListener('click',function(ev){
+var a=ev.target.closest?ev.target.closest('a'):null;if(!a||!root.contains(a))return;
+var h=a.getAttribute('href')||'';
+if(/-calculator|^\/tools/.test(h)){track('partner_tool_click',{tool:h.replace(/^\//,'')});return}
+if(a.classList.contains('vp2-a')||a.classList.contains('vp2-sticky')){var loc=a.getAttribute('data-vp2-cta')||(a.closest('.vp2-hero')?'hero':a.closest('.vp2-close')?'closing':'page');track('partner_cta_click',{cta_location:loc})}
+});
+var form=document.getElementById('vpt-form'),done=document.getElementById('vpt-done'),sel=document.getElementById('vpt-type');
+function ft(){return sel&&sel.value?sel.value:ptype}
+if(form){var started=false;form.addEventListener('focusin',function(){if(!started){started=true;track('partner_form_start',{partner_type:ft()})}})}
+if(done&&window.MutationObserver){var sent=false;new MutationObserver(function(){if(!sent&&done.style.display==='block'){sent=true;track('partner_form_submit',{partner_type:ft()})}}).observe(done,{attributes:true,attributeFilter:['style']})}
+});
+})();

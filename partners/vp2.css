@@ -155,3 +155,19 @@
 .vp2 .vp2-note a{color:#007A74;font-weight:600}
 @media (min-width:961px){.vp2 .vp2-rev>:first-child{order:2}}
 @media (max-width:640px){.vp2.vp2-tight .vp2-band{padding-top:52px;padding-bottom:52px}.vp2.vp2-tight .vp2-hero{padding-top:52px;padding-bottom:48px}.vp2 .vp2-cmp{grid-template-columns:minmax(0,1fr);gap:14px}.vp2 .vp2-cmp>div{padding:22px 20px;border-radius:20px}.vp2 .vp2-num li{grid-template-columns:52px minmax(0,1fr);padding:22px 0}.vp2 .vp2-num li::before{font-size:30px;align-self:start}.vp2 .vp2-num a{grid-column:2}}
+
+/* Final pre-launch polish */
+@keyframes vp2Spin{to{transform:rotate(360deg)}}
+@keyframes vp2Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.vp2 .vp2-stage::after{animation:vp2Spin 160s linear infinite}
+.vp2 .vp2-stage>svg{animation:vp2Float 14s ease-in-out infinite}
+.vp2 .vp2-panel.vp2-hasvee{padding:30px 24px 108px}
+.vp2 .vp2-panel>img.vp2-pv{position:relative;z-index:1;display:block;width:auto;max-width:82%;height:290px;object-fit:contain}
+.vp2 .vp2-sticky{position:fixed;left:14px;right:88px;bottom:14px;z-index:900;display:none;align-items:center;justify-content:center;min-height:50px;padding:13px 20px;border-radius:100px;background:#0D1B2A;color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 12px 30px -10px rgba(13,27,42,.55);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.vp2 .vp2-sticky.vp2-on{opacity:1;transform:none;pointer-events:auto}
+@media (max-width:640px){.vp2 .vp2-sticky{display:flex}
+.vp2 .vp2-hero{padding:50px 20px 46px}.vp2 .vp2-band{padding:52px 20px}.vp2 .vp2-mt{margin-top:28px}
+.vp2.vp2-tight .vp2-band{padding-top:46px;padding-bottom:46px}.vp2.vp2-tight .vp2-hero{padding-top:46px;padding-bottom:42px}
+.vp2 .vp2-band [style*='margin-top:72px']{margin-top:56px !important}
+.vp2 .vp2-panel.vp2-hasvee{padding:24px 16px 128px}.vp2 .vp2-panel>img.vp2-pv{height:230px;max-width:88%}}
+@media (prefers-reduced-motion:reduce){.vp2 *::before,.vp2 *::after{animation:none !important;transition:none !important}.vp2 .vp2-sticky{transition:none !important}}
