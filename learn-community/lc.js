@@ -34,6 +34,56 @@
   }
 
 
+
+  // ---------- Webflow CMS glue: turn bound data attributes into the approved markup ----------
+  var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function pd(v) { // accepts ISO dates or Webflow's "October 24, 2026" style
+    if (!v) return null; v = String(v).trim();
+    var m = v.match(/^(\d{4})-(\d{2})-(\d{2})/); if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+    m = v.match(/^([A-Za-z]+)\.?\s+(\d{1,2}),?\s+(\d{4})/);
+    if (m) { var i = MON.findIndex(function (x) { return x.toLowerCase().indexOf(m[1].toLowerCase().slice(0, 3)) === 0; }); if (i > -1) return new Date(+m[3], i, +m[2]); }
+    var t = new Date(v); return isNaN(t) ? null : new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  }
+  function iso(dt) { return dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2) + '-' + ('0' + dt.getDate()).slice(-2); }
+  function cmsGlue() {
+    // Start Here: keep guides that have an order, sorted, max 3
+    $$('.vlc-learn .start .w-dyn-items').forEach(function (list) {
+      if (!$('[data-start]', list)) return;
+      var its = $$('.w-dyn-item', list).filter(function (it) { var n = $('[data-start]', it); var v = n && n.getAttribute('data-start'); if (!v) { it.remove(); return false; } return true; });
+      its.sort(function (a, b) { return +$('[data-start]', a).getAttribute('data-start') - +$('[data-start]', b).getAttribute('data-start'); });
+      its.forEach(function (it, k) { if (k > 2) it.remove(); else list.appendChild(it); });
+    });
+    // Learning path steps: guide or calculator
+    $$('.vlc-learn a[data-step]').forEach(function (a) {
+      var gs = a.getAttribute('data-guide-slug'), cu = a.getAttribute('data-calc-url');
+      if (gs) { a.href = '/guides/' + gs; a.textContent = a.getAttribute('data-guide-name') || a.textContent; }
+      else if (cu) { a.href = cu; a.textContent = 'Calculator: ' + (a.getAttribute('data-calc-name') || ''); a.setAttribute('data-vlc-calc', a.getAttribute('data-calc-slug') || ''); }
+      else { var li = a.closest('li'); (li ? li.closest('.w-dyn-item') || li : a).remove(); }
+    });
+    $$('.vlc-learn .card.pa').forEach(function (c, k) {
+      if (k === 0) c.classList.add('open');
+      var first = $('a[data-step]', c), go = $('[data-vlc-path]', c); if (first && go) go.href = first.getAttribute('href');
+      $$('.steps i', c).forEach(function (i, n) { i.textContent = n + 1; });
+    });
+    // Vee Explains: link each word to the guide it appears in
+    $$('.vlc-learn [data-vlc-term][data-seen-slug]').forEach(function (s) { var g = s.getAttribute('data-seen-slug'); if (g) s.setAttribute('data-seen-href', '/guides/' + g); });
+    // Events: dates, month groups, cancelled
+    $$('.vlc-comm [data-ev-start]').forEach(function (ev) {
+      var host = ev.closest('.w-dyn-item') || ev;
+      if (ev.getAttribute('data-cancelled') === 'true') { host.remove(); return; }
+      var s = pd(ev.getAttribute('data-ev-start')), e = pd(ev.getAttribute('data-ev-end')) || s; if (!s) return;
+      var sh = function (x) { return MON[x.getMonth()].slice(0, 3) + ' ' + x.getDate(); };
+      ev.setAttribute('data-end', iso(e)); ev.setAttribute('data-month', iso(s).slice(0, 7)); ev.setAttribute('data-month-label', MON[s.getMonth()] + ' ' + s.getFullYear());
+      var dt = $('.dt', ev); if (dt) dt.innerHTML = '<small>' + MON[s.getMonth()].slice(0, 3) + '</small><b>' + s.getDate() + '</b>';
+      var multi = iso(s) !== iso(e), when = multi ? sh(s) + ' to ' + sh(e) : sh(s);
+      var sr = $('.loc .vlc-sr', ev); if (sr) sr.textContent = when + '. ';
+      var runs = $('[data-ev-runs]', ev); if (runs) { if (multi) runs.textContent = 'Runs ' + when + '. '; else runs.remove(); }
+    });
+    // Stories: add the jump link only when approved stories exist
+    var st = $('.vlc-comm #stories'); if (st && $$('.w-dyn-item', st).length) { var j = $('.vlc-comm .jump'); if (j && !$('a[href="#stories"]', j)) { var a = d.createElement('a'); a.href = '#stories'; a.textContent = 'Local stories'; j.insertBefore(a, j.children[1] || null); } }
+    else if (st) st.remove();
+  }
+
   // ---------- article: comparison table from a CMS plain-text field ----------
   // Webflow rich text has no tables, so the table HTML is stored as text and rebuilt here
   // from an allowlist of table tags (no scripts, links or styles can come through).
@@ -330,6 +380,7 @@
   ready(function () {
     if (!$('.vlc')) return;
     setHeader(); w.addEventListener('resize', setHeader);
+    try { cmsGlue(); } catch (e) {}
     try { faqs(); } catch (e) {}
     try { cmpTables(); } catch (e) {}
     try { toc(); } catch (e) {}
