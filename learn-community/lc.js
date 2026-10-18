@@ -258,6 +258,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault(); if (busy) return;
       if (!check()) return;
+      if (!ep) { banner.className = 'banner pend'; banner.textContent = 'Preview only: sending is turned off on this copy of the page.'; banner.focus(); return; }
       busy = true; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); banner.className = 'banner'; banner.textContent = '';
       var tokenEl = form.querySelector('[name="cf-turnstile-response"]');
       var c = FORMS[type];
