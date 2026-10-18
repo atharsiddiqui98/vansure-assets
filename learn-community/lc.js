@@ -33,6 +33,30 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+
+  // ---------- article: comparison table from a CMS plain-text field ----------
+  // Webflow rich text has no tables, so the table HTML is stored as text and rebuilt here
+  // from an allowlist of table tags (no scripts, links or styles can come through).
+  function cmpTables() {
+    $$('.vlc-article [data-vlc-cmp]').forEach(function (box) {
+      var raw = box.textContent.trim(); if (!/^<table/i.test(raw)) { if (!raw) box.hidden = true; return; }
+      var doc = new DOMParser().parseFromString(raw, 'text/html'), OK = { TABLE: 1, THEAD: 1, TBODY: 1, TR: 1, TH: 1, TD: 1, SPAN: 1, B: 1 };
+      function copy(n) {
+        if (n.nodeType === 3) return document.createTextNode(n.nodeValue);
+        if (n.nodeType !== 1 || !OK[n.tagName]) return document.createTextNode(n.textContent || '');
+        var el = document.createElement(n.tagName.toLowerCase());
+        if (n.tagName === 'SPAN' && n.getAttribute('class') === 'vlc-sr') el.className = 'vlc-sr';
+        if (n.tagName === 'TD' && n.hasAttribute('data-l')) el.setAttribute('data-l', n.getAttribute('data-l'));
+        if (n.tagName === 'TH' && n.parentNode && n.parentNode.parentNode && n.parentNode.parentNode.tagName === 'TBODY') el.setAttribute('scope', 'row');
+        if (n.tagName === 'TH' && n.parentNode && n.parentNode.parentNode && n.parentNode.parentNode.tagName === 'THEAD') el.setAttribute('scope', 'col');
+        for (var c = n.firstChild; c; c = c.nextSibling) el.appendChild(copy(c));
+        return el;
+      }
+      var t = doc.querySelector('table'); if (!t) return; var out = copy(t); out.className = 'cmp';
+      box.textContent = ''; box.appendChild(out); box.classList.add('rt'); box.hidden = false;
+    });
+  }
+
   // ---------- article: table of contents ----------
   function slug(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60); }
   function toc() {
@@ -189,9 +213,9 @@
 
   // ---------- Ask Vansure / Suggest an event / Nominate a business ----------
   var FORMS = {
-    question: { topic: null, h: 'Have an insurance question? Ask privately.', msgLabel: 'Your question', msgHint: 'Please leave out policy numbers, health details, dates of birth and banking information.', btn: 'Send my question', consent: 'I agree that Vansure may use my name and email to reply to this question.', version: 'ask-question-v1' },
-    event: { topic: 'Suggest an event', h: 'Suggest a local event', msgLabel: 'Tell us about the event', msgHint: 'Name, date, place and who runs it. We check every event with its organizer before listing it.', btn: 'Send the event', consent: 'I agree that Vansure may use my name and email to follow up about this event suggestion.', version: 'suggest-event-v1' },
-    nomination: { topic: 'Nominate a business', h: 'Nominate a local business', msgLabel: 'Why should we feature them?', msgHint: 'We contact the business and only share their story with their permission.', btn: 'Send the nomination', consent: 'I agree that Vansure may use my name and email to follow up about this nomination.', version: 'nominate-business-v1' },
+    question: { topic: null, h: 'Have an insurance question? Ask privately.', sub: 'Send us a message and we\u2019ll reply by email.', msgLabel: 'Your question', msgHint: 'Please leave out policy numbers, health details, dates of birth and banking information.', btn: 'Send my question', consent: 'I agree that Vansure may use my name and email to reply to this question.', version: 'ask-question-v1' },
+    event: { topic: 'Suggest an event', h: 'Know about a local event? Send it our way.', sub: 'Tell us what\u2019s happening. We check every event with its organizer before we list it.', msgLabel: 'Tell us about the event', msgHint: 'Name, date, place and who runs it. We check every event with its organizer before listing it.', btn: 'Send the event', consent: 'I agree that Vansure may use my name and email to follow up about this event suggestion.', version: 'suggest-event-v1' },
+    nomination: { topic: 'Nominate a business', h: 'Know a local business worth featuring? Nominate them.', sub: 'Tell us who they are and why. We\u2019ll reach out to them before we share anything.', msgLabel: 'Why should we feature them?', msgHint: 'We contact the business and only share their story with their permission.', btn: 'Send the nomination', consent: 'I agree that Vansure may use my name and email to follow up about this nomination.', version: 'nominate-business-v1' },
   };
   var RCHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   function newRef() { var a = new Uint8Array(10); crypto.getRandomValues(a); var s = 'VQ-'; for (var i = 0; i < 10; i++) s += RCHARS[a[i] % 32]; return s; }
@@ -199,11 +223,11 @@
     var form = $('.vlc-comm form[data-vlc-ask]'); if (!form) return;
     var ep = form.getAttribute('data-endpoint'); var type = 'question', ref = newRef(), started = false, busy = false;
     var F = function (n) { return form.elements[n]; };
-    var banner = $('.banner', form), btn = $('.fbtn', form), btnTxt = $('.fbtn-t', form), head = $('[data-vlc-form-h]');
+    var banner = $('.banner', form), btn = $('.fbtn', form), btnTxt = $('.fbtn-t', form), head = $('[data-vlc-form-h]'), sub = $('[data-vlc-form-sub]');
     function setType(t, focus) {
       type = t; var c = FORMS[t];
       $$('.ftabs button', form).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-type') === t ? 'true' : 'false'); });
-      if (head) head.textContent = c.h;
+      if (head) head.textContent = c.h; if (sub) sub.textContent = c.sub;
       $('[for=vlc-msg]', form).textContent = c.msgLabel; $('#vlc-msg-hint', form).textContent = c.msgHint;
       btnTxt.textContent = c.btn; $('#vlc-consent-text', form).textContent = c.consent + ' ';
       $('.f-topic', form).hidden = t !== 'question'; $('.f-biz', form).hidden = t !== 'nomination'; $('.f-link', form).hidden = t !== 'event';
@@ -307,6 +331,7 @@
     if (!$('.vlc')) return;
     setHeader(); w.addEventListener('resize', setHeader);
     try { faqs(); } catch (e) {}
+    try { cmpTables(); } catch (e) {}
     try { toc(); } catch (e) {}
     try { veeTabs(); } catch (e) {}
     try { stories(); } catch (e) {}
