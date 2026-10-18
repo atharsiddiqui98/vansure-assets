@@ -378,6 +378,11 @@
 .vlc [data-vlc-empty-msg] .w-dyn-empty{display:block;background:none;padding:0}
 /* Webflow list wrappers should not add their own layout */
 .vlc .w-dyn-list,.vlc .w-dyn-items{display:contents}
+/* Webflow embeds and rich text wrappers should not add layout either */
+.vlc .w-embed{display:contents}
+.vlc .w-embed::before,.vlc .w-embed::after{content:none;display:none}
+/* path steps rendered from a nested CMS list (no ol/li available) */
+.vlc-learn .steps .stp{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45;padding:9px 0;border-top:1px solid var(--line)}
 .vlc-learn .start .w-dyn-item:first-child .st{background:linear-gradient(160deg,#fff 0%,#F0F8F7 100%);border-color:rgba(0,165,157,.25)}
 .vlc-learn .start .w-dyn-item:first-child .st h3{font-size:24px}
 .vlc-learn .start:has(.w-dyn-item:only-child){grid-template-columns:1fr}
@@ -462,3 +467,20 @@
 .vlc-learn .flt .sel{flex:none;width:100%;min-width:0}
 }
 .vlc .chip{position:relative}
+
+/* inline text pieces bound to CMS fields (Webflow text blocks render as div) */
+.vlc .ib{display:inline}
+.vlc .tag .ib+.ib::before{content:"\00B7";margin:0 .4em}
+.vlc .meta .ib{margin-right:.3em}
+.vlc-learn .steps .si{font-style:normal;width:24px;height:24px;border-radius:50%;border:2px solid rgba(0,122,116,.35);color:var(--teal-d);font-size:11.5px;font-weight:700;display:grid;place-items:center;flex:none}
+/* Webflow template wrappers */
+.vlc .toc-slot,.vlc .cta-slot,.vlc .body-rt,.vlc .faqs-rt>.w-richtext,.vlc .src>.w-richtext,.vlc .body-rt>.w-richtext{display:contents}
+.vlc-article .rel-h{font-size:22px}
+.vlc .sp60{height:60px}
+.vlc-article .calc .cp{margin:0;color:rgba(255,255,255,.85);font-size:15px}
+.vlc-article .calc .cn{margin-left:.28em}
+.vlc .rvv{margin-left:.3em;font-weight:600}
+.vlc-article .ameta .rvv{color:#fff}
+.vlc-article .rel .rl-t{display:block;font-size:12px;color:var(--teal-d);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.vlc .w-dyn-empty{display:none}
+.vlc .w-richtext::before,.vlc .w-richtext::after{content:none;display:none}

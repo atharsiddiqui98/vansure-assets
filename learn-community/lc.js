@@ -46,43 +46,65 @@
   }
   function iso(dt) { return dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2) + '-' + ('0' + dt.getDate()).slice(-2); }
   function cmsGlue() {
-    // Start Here: keep guides that have an order, sorted, max 3
+    var T = function (el) { return el ? (el.textContent || '').trim() : ''; };
+    var attr = function (root, sel, name) { var el = $(sel, root); return el ? el.getAttribute(name) || '' : ''; };
+    // Hide a wrapper when the CMS value inside it is empty (stands in for Designer conditional visibility).
+    $$('.vlc [data-vlc-needs]').forEach(function (w0) {
+      var v = $('[data-vlc-val]', w0) || w0;
+      var empty = v.tagName === 'A' ? !(v.getAttribute('href') || '').replace(/^#.*$/, '') : !T(v) && !v.querySelector('img,table');
+      if (empty) w0.hidden = true;
+    });
+    // TEMP (replace with native filter "Start Here order is set" + limit 3):
+    // Start Here keeps guides that have an order, lowest first, max 3.
     $$('.vlc-learn .start .w-dyn-items').forEach(function (list) {
-      if (!$('[data-start]', list)) return;
-      var its = $$('.w-dyn-item', list).filter(function (it) { var n = $('[data-start]', it); var v = n && n.getAttribute('data-start'); if (!v) { it.remove(); return false; } return true; });
-      its.sort(function (a, b) { return +$('[data-start]', a).getAttribute('data-start') - +$('[data-start]', b).getAttribute('data-start'); });
-      its.forEach(function (it, k) { if (k > 2) it.remove(); else list.appendChild(it); });
+      var its = $$('.w-dyn-item', list).filter(function (it) { if (!T($('.n', it))) { it.remove(); return false; } return true; });
+      its.sort(function (x, y) { return +T($('.n', x)) - +T($('.n', y)); }).forEach(function (it, k) { if (k > 2) it.remove(); else list.appendChild(it); });
     });
-    // Learning path steps: guide or calculator
-    $$('.vlc-learn a[data-step]').forEach(function (a) {
-      var gs = a.getAttribute('data-guide-slug'), cu = a.getAttribute('data-calc-url');
-      if (gs) { a.href = '/guides/' + gs; a.textContent = a.getAttribute('data-guide-name') || a.textContent; }
-      else if (cu) { a.href = cu; a.textContent = 'Calculator: ' + (a.getAttribute('data-calc-name') || ''); a.setAttribute('data-vlc-calc', a.getAttribute('data-calc-slug') || ''); }
-      else { var li = a.closest('li'); (li ? li.closest('.w-dyn-item') || li : a).remove(); }
+    // Learning paths: each step is a guide or a calculator.
+    $$('.vlc-learn .card.pa').forEach(function (card, k) {
+      var slug = attr(card, '[data-vlc-path]', 'data-vlc-path');
+      var list = $('.steps .w-dyn-items', card);
+      if (list) {
+        // TEMP (replace by setting the nested list source to the path's "Steps" field, sorted by Order):
+        var its = $$('.w-dyn-item', list).filter(function (it) { var p = attr(it, '[data-step]', 'data-path'); if (slug && p && p !== slug) { it.remove(); return false; } return true; });
+        its.sort(function (x, y) { return (+attr(x, '[data-step]', 'data-order') || 0) - (+attr(y, '[data-step]', 'data-order') || 0); }).forEach(function (it) { list.appendChild(it); });
+      }
+      var first = '';
+      $$('a[data-step]', card).forEach(function (a) {
+        var gs = a.getAttribute('data-guide-slug'), cu = a.getAttribute('data-calc-url');
+        var row = a.closest('.w-dyn-item') || a.closest('li') || a;
+        if (gs) a.href = '/guides/' + gs;
+        else if (cu) { a.href = cu.replace(/^https:\/\/www\.vansure\.ca/, ''); var cs = a.getAttribute('data-calc-slug'); if (cs) a.setAttribute('data-vlc-calc', cs); }
+        else { row.remove(); return; }
+        if (!first) first = a.getAttribute('href');
+      });
+      $$('.steps .si, .steps i', card).forEach(function (n, i) { n.textContent = String(i + 1); });
+      var go = $('[data-vlc-path]', card); if (go && first) go.href = first;
+      if (k === 0) card.classList.add('open');
     });
-    $$('.vlc-learn .card.pa').forEach(function (c, k) {
-      if (k === 0) c.classList.add('open');
-      var first = $('a[data-step]', c), go = $('[data-vlc-path]', c); if (first && go) go.href = first.getAttribute('href');
-      $$('.steps i', c).forEach(function (i, n) { i.textContent = n + 1; });
-    });
-    // Vee Explains: link each word to the guide it appears in
-    $$('.vlc-learn [data-vlc-term][data-seen-slug]').forEach(function (s) { var g = s.getAttribute('data-seen-slug'); if (g) s.setAttribute('data-seen-href', '/guides/' + g); });
-    // Events: dates, month groups, cancelled
-    $$('.vlc-comm [data-ev-start]').forEach(function (ev) {
+    // Vee Explains: link each word to the guide it appears in.
+    $$('.vlc-learn [data-vlc-term]').forEach(function (s0) { var g = s0.getAttribute('data-seen-slug'); if (g) s0.setAttribute('data-seen-href', '/guides/' + g); });
+    // Related guides: drop empty slots.
+    $$('.vlc-article .rel a').forEach(function (a) { if (!T(a)) (a.closest('.w-dyn-item') || a).remove(); });
+    // Events: dates, month groups and screen-reader date text from the CMS dates.
+    $$('.vlc-comm .ev[data-ev-start]').forEach(function (ev) {
       var host = ev.closest('.w-dyn-item') || ev;
+      // TEMP (replace with native filter "Cancelled is off"):
       if (ev.getAttribute('data-cancelled') === 'true') { host.remove(); return; }
-      var s = pd(ev.getAttribute('data-ev-start')), e = pd(ev.getAttribute('data-ev-end')) || s; if (!s) return;
+      var s1 = pd(ev.getAttribute('data-ev-start')), e1 = pd(ev.getAttribute('data-ev-end')) || s1; if (!s1) return;
       var sh = function (x) { return MON[x.getMonth()].slice(0, 3) + ' ' + x.getDate(); };
-      ev.setAttribute('data-end', iso(e)); ev.setAttribute('data-month', iso(s).slice(0, 7)); ev.setAttribute('data-month-label', MON[s.getMonth()] + ' ' + s.getFullYear());
-      var dt = $('.dt', ev); if (dt) dt.innerHTML = '<small>' + MON[s.getMonth()].slice(0, 3) + '</small><b>' + s.getDate() + '</b>';
-      var multi = iso(s) !== iso(e), when = multi ? sh(s) + ' to ' + sh(e) : sh(s);
+      ev.setAttribute('data-end', iso(e1)); ev.setAttribute('data-month', iso(s1).slice(0, 7)); ev.setAttribute('data-month-label', MON[s1.getMonth()] + ' ' + s1.getFullYear());
+      var dt = $('.dt', ev); if (dt) dt.innerHTML = '<small>' + MON[s1.getMonth()].slice(0, 3) + '</small><b>' + s1.getDate() + '</b>';
+      var multi = iso(s1) !== iso(e1), when = multi ? sh(s1) + ' to ' + sh(e1) : sh(s1);
       var sr = $('.loc .vlc-sr', ev); if (sr) sr.textContent = when + '. ';
-      var runs = $('[data-ev-runs]', ev); if (runs) { if (multi) runs.textContent = 'Runs ' + when + '. '; else runs.remove(); }
+      var runs = $('[data-ev-runs]', ev); if (runs) { if (multi) runs.textContent = 'Runs ' + when + '.'; else runs.remove(); }
     });
-    // Stories: add the jump link only when approved stories exist
-    var st = $('.vlc-comm #stories'); if (st && $$('.w-dyn-item', st).length) { var j = $('.vlc-comm .jump'); if (j && !$('a[href="#stories"]', j)) { var a = d.createElement('a'); a.href = '#stories'; a.textContent = 'Local stories'; j.insertBefore(a, j.children[1] || null); } }
+    // Stories: show the section and its jump link only when approved stories exist.
+    var st = $('.vlc-comm #stories');
+    if (st && $$('.w-dyn-item', st).length) { var j = $('.vlc-comm .jump'); if (j && !$('a[href="#stories"]', j)) { var a2 = d.createElement('a'); a2.href = '#stories'; a2.textContent = 'Local stories'; j.insertBefore(a2, j.children[1] || null); } }
     else if (st) st.remove();
   }
+
 
   // ---------- article: comparison table from a CMS plain-text field ----------
   // Webflow rich text has no tables, so the table HTML is stored as text and rebuilt here
