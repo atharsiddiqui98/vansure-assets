@@ -484,3 +484,13 @@
 .vlc-article .rel .rl-t{display:block;font-size:12px;color:var(--teal-d);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .vlc .w-dyn-empty{display:none}
 .vlc .w-richtext::before,.vlc .w-richtext::after{content:none;display:none}
+.vlc .slot-hero,.vlc .slot-evtop,.vlc .slot-evbot,.vlc .slot-ask,.vlc .slot-ctrl,.vlc .slot-res,.vlc .slot-close{display:contents}
+.vlc-comm .loc .ib+.ib::before{content:"\00B7";margin:0 .4em}
+.vlc-comm .ev .evp{font-size:14px;line-height:1.6;color:var(--muted);margin:0}
+.vlc-comm .ev .runs:not(:empty){margin-right:.3em}
+.vlc-comm .ev .more .ib{margin-right:.3em}
+.vlc-comm .mini h3{margin:6px 0 6px;font-size:16px}
+.vlc-comm .mini .stp-s{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
+.vlc-article .crumb a{margin-right:.35em}
+.vlc-article .crumb .ib{margin-left:.35em}
+.vlc-article .ameta>div>.ib:first-child{margin-right:.3em}

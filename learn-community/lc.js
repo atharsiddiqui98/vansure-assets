@@ -84,9 +84,18 @@
     });
     // Vee Explains: link each word to the guide it appears in.
     $$('.vlc-learn [data-vlc-term]').forEach(function (s0) { var g = s0.getAttribute('data-seen-slug'); if (g) s0.setAttribute('data-seen-href', '/guides/' + g); });
+    // Guide meta: review dates show "Pending review" until approved; audience reads as a phrase.
+    $$('.vlc-article .rv-d').forEach(function (b) { if (!T(b)) b.textContent = b.closest('.ameta') ? 'Pending review' : 'pending'; });
+    $$('.vlc-article .rv-n').forEach(function (b) { if (!T(b)) b.textContent = 'pending'; });
+    // TEMP (or rename the Audience options in the CMS to these phrases):
+    $$('.vlc-article [data-vlc-audience]').forEach(function (el) { var v = T(el), m = { 'BC': 'For people in BC', 'BC and across Canada': 'For people in BC and across Canada', 'Newcomers': 'For newcomers to Canada' }; if (m[v]) el.textContent = m[v]; });
+    // TEMP (replace by setting the related list source to "Related guides"): drop the current guide, keep 3.
+    var cur = ($('.vlc-article') || { getAttribute: function () { return ''; } }).getAttribute('data-guide');
+    $$('.vlc-article .rel .w-dyn-items').forEach(function (list) { $$('.w-dyn-item', list).forEach(function (it, i) { var a = $('a', it); if (a && cur && a.getAttribute('data-rel-slug') === cur) it.remove(); }); $$('.w-dyn-item', list).forEach(function (it, i) { if (i > 2) it.remove(); }); });
     // Related guides: drop empty slots.
     $$('.vlc-article .rel a').forEach(function (a) { if (!T(a)) (a.closest('.w-dyn-item') || a).remove(); });
     // Events: dates, month groups and screen-reader date text from the CMS dates.
+    $$('.vlc-comm .ev-data').forEach(function (dd) { var ev = dd.closest('.ev'); if (!ev) return; ['data-ev-start', 'data-ev-end', 'data-area', 'data-cancelled'].forEach(function (n) { if (dd.hasAttribute(n)) ev.setAttribute(n, dd.getAttribute(n)); }); });
     $$('.vlc-comm .ev[data-ev-start]').forEach(function (ev) {
       var host = ev.closest('.w-dyn-item') || ev;
       // TEMP (replace with native filter "Cancelled is off"):
@@ -105,6 +114,23 @@
     else if (st) st.remove();
   }
 
+
+
+  // ---------- guide structured data (Article + BreadcrumbList) ----------
+  // Added from the rendered page so the CMS template needs no per-item code. Skipped if the page already has it.
+  function guideSchema() {
+    var art = $('.vlc-article'); if (!art || $$('script[type="application/ld+json"]').some(function (x) { return /"Article"/.test(x.textContent); })) return;
+    var h1 = $('h1', art); if (!h1) return;
+    var url = location.origin + location.pathname, desc = ($('meta[name="description"]') || {}).content || '';
+    var topic = (($('.crumb .ib', art) || {}).textContent || '').trim();
+    var data = [{ '@context': 'https://schema.org', '@type': 'Article', headline: h1.textContent.trim(), description: desc, mainEntityOfPage: url,
+      publisher: { '@type': 'Organization', name: 'Vansure Insurance Services Ltd.', url: 'https://www.vansure.ca/' } },
+      { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Learn', item: location.origin + '/learn' },
+        { '@type': 'ListItem', position: 2, name: h1.textContent.trim(), item: url }] }];
+    if (topic) data[1].itemListElement[1].name = h1.textContent.trim();
+    var sc = d.createElement('script'); sc.type = 'application/ld+json'; sc.setAttribute('data-vlc', ''); sc.textContent = JSON.stringify(data); d.head.appendChild(sc);
+  }
 
   // ---------- article: comparison table from a CMS plain-text field ----------
   // Webflow rich text has no tables, so the table HTML is stored as text and rebuilt here
@@ -403,6 +429,7 @@
     if (!$('.vlc')) return;
     setHeader(); w.addEventListener('resize', setHeader);
     try { cmsGlue(); } catch (e) {}
+    try { guideSchema(); } catch (e) {}
     try { faqs(); } catch (e) {}
     try { cmpTables(); } catch (e) {}
     try { toc(); } catch (e) {}
