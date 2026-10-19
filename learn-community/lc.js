@@ -47,28 +47,8 @@
   function iso(dt) { return dt.getFullYear() + '-' + ('0' + (dt.getMonth() + 1)).slice(-2) + '-' + ('0' + dt.getDate()).slice(-2); }
   function cmsGlue() {
     var T = function (el) { return el ? (el.textContent || '').trim() : ''; };
-    var attr = function (root, sel, name) { var el = $(sel, root); return el ? el.getAttribute(name) || '' : ''; };
-    // Hide a wrapper when the CMS value inside it is empty (stands in for Designer conditional visibility).
-    $$('.vlc [data-vlc-needs]').forEach(function (w0) {
-      var v = $('[data-vlc-val]', w0) || w0;
-      var empty = v.tagName === 'A' ? !(v.getAttribute('href') || '').replace(/^#.*$/, '') : !T(v) && !v.querySelector('img,table');
-      if (empty) w0.hidden = true;
-    });
-    // TEMP (replace with native filter "Start Here order is set" + limit 3):
-    // Start Here keeps guides that have an order, lowest first, max 3.
-    $$('.vlc-learn .start .w-dyn-items').forEach(function (list) {
-      var its = $$('.w-dyn-item', list).filter(function (it) { if (!T($('.n', it))) { it.remove(); return false; } return true; });
-      its.sort(function (x, y) { return +T($('.n', x)) - +T($('.n', y)); }).forEach(function (it, k) { if (k > 2) it.remove(); else list.appendChild(it); });
-    });
     // Learning paths: each step is a guide or a calculator.
     $$('.vlc-learn .card.pa').forEach(function (card, k) {
-      var slug = attr(card, '[data-vlc-path]', 'data-vlc-path');
-      var list = $('.steps .w-dyn-items', card);
-      if (list) {
-        // TEMP (replace by setting the nested list source to the path's "Steps" field, sorted by Order):
-        var its = $$('.w-dyn-item', list).filter(function (it) { var p = attr(it, '[data-step]', 'data-path'); if (slug && p && p !== slug) { it.remove(); return false; } return true; });
-        its.sort(function (x, y) { return (+attr(x, '[data-step]', 'data-order') || 0) - (+attr(y, '[data-step]', 'data-order') || 0); }).forEach(function (it) { list.appendChild(it); });
-      }
       var first = '';
       $$('a[data-step]', card).forEach(function (a) {
         var gs = a.getAttribute('data-guide-slug'), cu = a.getAttribute('data-calc-url');
@@ -84,22 +64,14 @@
     });
     // Vee Explains: link each word to the guide it appears in.
     $$('.vlc-learn [data-vlc-term]').forEach(function (s0) { var g = s0.getAttribute('data-seen-slug'); if (g) s0.setAttribute('data-seen-href', '/guides/' + g); });
-    // Guide meta: review dates show "Pending review" until approved; audience reads as a phrase.
+    // Guide meta: review dates show "Pending review" until approved.
     $$('.vlc-article .rv-d').forEach(function (b) { if (!T(b)) b.textContent = b.closest('.ameta') ? 'Pending review' : 'pending'; });
     $$('.vlc-article .rv-n').forEach(function (b) { if (!T(b)) b.textContent = 'pending'; });
-    // TEMP (or rename the Audience options in the CMS to these phrases):
-    $$('.vlc-article [data-vlc-audience]').forEach(function (el) { var v = T(el), m = { 'BC': 'For people in BC', 'BC and across Canada': 'For people in BC and across Canada', 'Newcomers': 'For newcomers to Canada' }; if (m[v]) el.textContent = m[v]; });
-    // TEMP (replace by setting the related list source to "Related guides"): drop the current guide, keep 3.
-    var cur = ($('.vlc-article') || { getAttribute: function () { return ''; } }).getAttribute('data-guide');
-    $$('.vlc-article .rel .w-dyn-items').forEach(function (list) { $$('.w-dyn-item', list).forEach(function (it, i) { var a = $('a', it); if (a && cur && a.getAttribute('data-rel-slug') === cur) it.remove(); }); $$('.w-dyn-item', list).forEach(function (it, i) { if (i > 2) it.remove(); }); });
     // Related guides: drop empty slots.
     $$('.vlc-article .rel a').forEach(function (a) { if (!T(a)) (a.closest('.w-dyn-item') || a).remove(); });
     // Events: dates, month groups and screen-reader date text from the CMS dates.
-    $$('.vlc-comm .ev-data').forEach(function (dd) { var ev = dd.closest('.ev'); if (!ev) return; ['data-ev-start', 'data-ev-end', 'data-area', 'data-cancelled'].forEach(function (n) { if (dd.hasAttribute(n)) ev.setAttribute(n, dd.getAttribute(n)); }); });
+    $$('.vlc-comm .ev-data').forEach(function (dd) { var ev = dd.closest('.ev'); if (!ev) return; ['data-ev-start', 'data-ev-end', 'data-area'].forEach(function (n) { if (dd.hasAttribute(n)) ev.setAttribute(n, dd.getAttribute(n)); }); });
     $$('.vlc-comm .ev[data-ev-start]').forEach(function (ev) {
-      var host = ev.closest('.w-dyn-item') || ev;
-      // TEMP (replace with native filter "Cancelled is off"):
-      if (ev.getAttribute('data-cancelled') === 'true') { host.remove(); return; }
       var s1 = pd(ev.getAttribute('data-ev-start')), e1 = pd(ev.getAttribute('data-ev-end')) || s1; if (!s1) return;
       var sh = function (x) { return MON[x.getMonth()].slice(0, 3) + ' ' + x.getDate(); };
       ev.setAttribute('data-end', iso(e1)); ev.setAttribute('data-month', iso(s1).slice(0, 7)); ev.setAttribute('data-month-label', MON[s1.getMonth()] + ' ' + s1.getFullYear());
