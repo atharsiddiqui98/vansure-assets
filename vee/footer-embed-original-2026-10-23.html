@@ -1,0 +1,848 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/atharsiddiqui98/vansure-assets@8afbd676ca5c52eaff7238138cfc5f159c44e875/vansure-master-v6.css">
+<style>
+
+  /* ============================================================
+     VANSURE FOOTER v3 — Site Settings Override
+     ============================================================ */
+
+  /* ---- DESKTOP GRID ---- */
+  .vs-footer-grid {
+    max-width: 1140px !important;
+    margin: 0 auto 48px !important;
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
+    gap: 48px 40px !important;
+    align-items: start !important;
+  }
+
+
+  /* ---- FONT ENFORCEMENT (applies at all screen sizes) ---- */
+  .vs-footer h1,
+  .vs-footer h2,
+  .vs-footer h3,
+  .vs-footer h4,
+  .vs-footer h5,
+  .vs-footer h6,
+  .vs-footer p,
+  .vs-footer div,
+  .vs-footer a,
+  .vs-footer span {
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  }
+
+
+  /* ---- COLUMN TITLES (Life & Health, Travel, Company) ---- */
+  .vs-footer h4.vs-footer-col-title,
+  footer.vs-footer h4.vs-footer-col-title {
+    font-family: "Poppins", system-ui, sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    color: #ffffff !important;
+    margin: 0 0 18px 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+
+  /* ---- TABLET (≤1100px) ---- */
+  @media (max-width: 1100px) {
+    .vs-footer-grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr !important;
+      gap: 40px 32px !important;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .vs-footer-grid {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 36px 32px !important;
+    }
+
+    .vs-footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+<style>
+@media (max-width: 767px) {
+  .vs-footer {
+    padding: 42px 22px 28px !important;
+  }
+
+  .vs-footer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    text-align: center !important;
+    margin-bottom: 32px !important;
+  }
+
+  .vs-footer-brand {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .vs-footer-logo {
+    width: 170px !important;
+    max-width: 170px !important;
+    margin: 0 auto 18px !important;
+  }
+
+  .vs-footer-brand-text {
+    max-width: 280px !important;
+    margin: 0 auto 20px !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .vs-footer-contact {
+    justify-content: center !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .vs-footer-social {
+    justify-content: center !important;
+    margin-top: 18px !important;
+    gap: 18px !important;
+  }
+
+  .vs-footer-social-link {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .vs-footer-col {
+    text-align: center !important;
+  }
+
+  .vs-footer-col-title {
+    text-align: center !important;
+    margin-bottom: 14px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .vs-footer-col-links {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .vs-footer-link {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .vs-footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    padding-top: 24px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 12px !important;
+  }
+
+  .vs-footer-copy,
+  .vs-footer-legal-link {
+    font-size: 0.8rem !important;
+  }
+
+  .vs-footer-legal {
+    justify-content: center !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+  }
+}
+</style>
+<footer class="vs-footer">
+
+  <div class="vs-footer-grid">
+
+    <!-- COL 1: BRAND -->
+    <div class="vs-footer-brand">
+      <a href="/" aria-label="Vansure home">
+        <img src="https://cdn.prod.website-files.com/6941bdd7b10f9c5c55445ce4/69787bd0b91ae513fb56d027_white-vs.png" alt="Vansure" class="vs-footer-logo" />
+      </a>
+      <p class="vs-footer-brand-text">
+        Licensed insurance brokers serving British Columbia.
+      </p>
+
+      <a href="tel:7788927800" class="vs-footer-contact">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        (778) 892-7800
+      </a>
+
+      <a href="mailto:info@vansure.ca" class="vs-footer-contact">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        info@vansure.ca
+      </a>
+
+      <p class="vs-footer-contact" style="cursor:default;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        #209–11950 80th Ave, Delta, BC V4C 6P6
+      </p>
+
+      <div class="vs-footer-social">
+        <a href="https://instagram.com/vansure" target="_blank" rel="noopener" class="vs-footer-social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com/vansure" target="_blank" rel="noopener" class="vs-footer-social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/company/vansure" target="_blank" rel="noopener" class="vs-footer-social-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- COL 2: LIFE & HEALTH -->
+    <div class="vs-footer-col">
+      <h4 class="vs-footer-col-title">Life &amp; Health</h4>
+      <div class="vs-footer-col-links">
+        <a href="/insurance/term-life" class="vs-footer-link">Term Life</a>
+        <a href="/insurance/permanent-life" class="vs-footer-link">Permanent Life</a>
+        <a href="/insurance/critical-illness" class="vs-footer-link">Critical Illness</a>
+        <a href="/insurance/disability" class="vs-footer-link">Disability</a>
+        <a href="/insurance/mortgage-protection" class="vs-footer-link">Mortgage Protection</a>
+      </div>
+    </div>
+
+    <!-- COL 3: TRAVEL -->
+    <div class="vs-footer-col">
+      <h4 class="vs-footer-col-title">Travel</h4>
+      <div class="vs-footer-col-links">
+        <a href="/insurance/travel" class="vs-footer-link">Travel</a>
+        <a href="/insurance/visitor-to-canada" class="vs-footer-link">Visitor to Canada</a>
+        <a href="/insurance/super-visa" class="vs-footer-link">Super Visa</a>
+      </div>
+    </div>
+
+    <!-- COL 4: COMPANY -->
+    <div class="vs-footer-col">
+      <h4 class="vs-footer-col-title">Company</h4>
+      <div class="vs-footer-col-links">
+        <a href="/about" class="vs-footer-link">About Vansure</a>
+        <a href="/faqs" class="vs-footer-link">FAQs</a>
+        <a href="/tools" class="vs-footer-link">Tools</a>
+        <a href="/contact" class="vs-footer-link">Contact</a>
+        <a href="/claims" class="vs-footer-link">Claims &amp; Support</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="vs-footer-bottom">
+    <span class="vs-footer-copy">© 2026 Vansure Insurance. All rights reserved.</span>
+    <div class="vs-footer-legal">
+      <a href="/privacy" class="vs-footer-legal-link">Privacy Policy</a>
+      <a href="/terms" class="vs-footer-legal-link">Terms of Use</a>
+    </div>
+  </div>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  VEE — Vansure AI Chat Widget                               ║
+  ║  Paste this entire block into:                              ║
+  ║  Webflow → Pages → Site Settings → Footer Code             ║
+  ║  (or any global Code Embed in your footer)                  ║
+  ║                                                              ║
+  ║  Before pasting: replace WORKER_URL below with the URL      ║
+  ║  Cloudflare gives you after deploying vee-worker.js         ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+
+<style>
+  /* ── Vee widget tokens ── */
+  #vee-root {
+    --vee-navy:      #20334C;
+    --vee-navy-dark: #162438;
+    --vee-navy-mid:  #2E4A68;
+    --vee-white:     #FFFFFF;
+    --vee-off:       #F5F7FB;
+    --vee-border:    #D8E2EE;
+    --vee-text:      #20334C;
+    --vee-muted:     #5A6E85;
+    --vee-bubble-bg: #EBF0F8;
+    --vee-radius:    16px;
+    --vee-font:      'Poppins', system-ui, sans-serif;
+    --vee-shadow:    0 8px 40px rgba(32,51,76,0.18), 0 2px 8px rgba(32,51,76,0.10);
+    font-family: var(--vee-font);
+  }
+
+  /* ── Launcher button ── */
+  #vee-launcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9998;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--vee-navy);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(32,51,76,0.30);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+  }
+  #vee-launcher:hover {
+    transform: scale(1.07);
+    box-shadow: 0 6px 28px rgba(32,51,76,0.38);
+  }
+  #vee-launcher:focus-visible {
+    outline: 3px solid #4A9FE0;
+    outline-offset: 3px;
+  }
+  #vee-launcher svg { transition: opacity 0.15s; }
+  #vee-launcher.open #vee-icon-chat { opacity: 0; position: absolute; }
+  #vee-launcher.open #vee-icon-close { opacity: 1; }
+  #vee-launcher:not(.open) #vee-icon-close { opacity: 0; position: absolute; }
+  #vee-launcher:not(.open) #vee-icon-chat { opacity: 1; }
+
+  /* ── Unread badge ── */
+  #vee-badge {
+    position: absolute;
+    top: 0; right: 0;
+    width: 18px; height: 18px;
+    background: #D42B2B;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    font-family: var(--vee-font);
+  }
+  #vee-badge.show { display: flex; }
+
+  /* ── Chat panel ── */
+  #vee-panel {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    z-index: 9997;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 520px;
+    max-height: calc(100vh - 120px);
+    background: var(--vee-white);
+    border-radius: var(--vee-radius);
+    box-shadow: var(--vee-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(16px) scale(0.97);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease;
+  }
+  #vee-panel.open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── Panel header ── */
+  #vee-header {
+    background: var(--vee-navy);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  #vee-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--vee-navy-mid);
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  #vee-header-info { flex: 1; min-width: 0; }
+  #vee-header-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+  }
+  #vee-header-status {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+  }
+  #vee-header-status::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #3CD68A;
+    flex-shrink: 0;
+  }
+
+  /* ── Messages area ── */
+  #vee-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+  }
+  #vee-messages::-webkit-scrollbar { width: 4px; }
+  #vee-messages::-webkit-scrollbar-track { background: transparent; }
+  #vee-messages::-webkit-scrollbar-thumb { background: var(--vee-border); border-radius: 4px; }
+
+  /* ── Message bubbles ── */
+  .vee-msg {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+    max-width: 88%;
+    animation: veeFadeUp 0.18s ease forwards;
+  }
+  @keyframes veeFadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .vee-msg.bot { align-self: flex-start; }
+  .vee-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  .vee-msg-avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--vee-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-bottom: 1px;
+  }
+  .vee-msg.user .vee-msg-avatar { display: none; }
+
+  .vee-bubble {
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--vee-text);
+    word-break: break-word;
+  }
+  .vee-msg.bot .vee-bubble {
+    background: var(--vee-bubble-bg);
+    border-bottom-left-radius: 4px;
+  }
+  .vee-msg.user .vee-bubble {
+    background: var(--vee-navy);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  /* ── Typing indicator ── */
+  #vee-typing {
+    display: none;
+    align-self: flex-start;
+    align-items: flex-end;
+    gap: 7px;
+  }
+  #vee-typing.show { display: flex; }
+  #vee-typing-dots {
+    background: var(--vee-bubble-bg);
+    padding: 11px 15px;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  #vee-typing-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--vee-muted);
+    animation: veeDot 1.2s infinite;
+  }
+  #vee-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  #vee-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes veeDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30%            { transform: translateY(-4px); opacity: 1; }
+  }
+
+  /* ── Quick replies ── */
+  #vee-quick-replies {
+    padding: 0 14px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .vee-qr {
+    font-family: var(--vee-font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--vee-navy);
+    background: var(--vee-off);
+    border: 1px solid var(--vee-border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .vee-qr:hover { background: var(--vee-bubble-bg); border-color: var(--vee-navy-mid); }
+
+  /* ── Input bar ── */
+  #vee-input-bar {
+    padding: 10px 12px;
+    border-top: 1px solid var(--vee-border);
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    background: var(--vee-white);
+    flex-shrink: 0;
+  }
+  #vee-input {
+    flex: 1;
+    font-family: var(--vee-font);
+    font-size: 13.5px;
+    color: var(--vee-text);
+    background: var(--vee-off);
+    border: 1px solid var(--vee-border);
+    border-radius: 22px;
+    padding: 9px 14px;
+    resize: none;
+    outline: none;
+    line-height: 1.45;
+    max-height: 100px;
+    overflow-y: auto;
+    transition: border-color 0.15s;
+  }
+  #vee-input::placeholder { color: var(--vee-muted); }
+  #vee-input:focus { border-color: var(--vee-navy-mid); background: #fff; }
+
+  #vee-send {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--vee-navy);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+    outline: none;
+  }
+  #vee-send:hover { background: var(--vee-navy-dark); transform: scale(1.05); }
+  #vee-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  #vee-send:focus-visible { outline: 3px solid #4A9FE0; outline-offset: 2px; }
+
+  /* ── Panel footer ── */
+  #vee-panel-footer {
+    text-align: center;
+    padding: 6px 0 9px;
+    font-size: 10.5px;
+    color: var(--vee-muted);
+    border-top: 1px solid var(--vee-border);
+    flex-shrink: 0;
+  }
+  #vee-panel-footer a {
+    color: var(--vee-navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ── Mobile tweak ── */
+  @media (max-width: 420px) {
+    #vee-panel { right: 12px; bottom: 88px; width: calc(100vw - 24px); }
+    #vee-launcher { right: 16px; bottom: 16px; }
+  }
+</style>
+
+<div id="vee-root">
+  <!-- Launcher -->
+  <button id="vee-launcher" aria-label="Chat with Vee" aria-expanded="false" aria-controls="vee-panel">
+    <div id="vee-badge" aria-hidden="true">1</div>
+    <!-- Chat icon -->
+    <svg id="vee-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.03 2 11c0 2.6 1.13 4.95 2.96 6.64L4 22l4.67-1.56C9.99 20.8 10.98 21 12 21c5.52 0 10-4.03 10-9S17.52 2 12 2Z" fill="white"/>
+    </svg>
+    <!-- Close icon -->
+    <svg id="vee-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M15 5L5 15M5 5l10 10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <!-- Panel -->
+  <div id="vee-panel" role="dialog" aria-label="Vee – Vansure Insurance Guide" aria-hidden="true">
+
+    <!-- Header -->
+    <div id="vee-header">
+      <div id="vee-avatar" aria-hidden="true">🌿</div>
+      <div id="vee-header-info">
+        <div id="vee-header-name">Vee</div>
+        <div id="vee-header-status">Vansure Insurance Guide</div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="vee-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+
+    <!-- Typing -->
+    <div id="vee-typing" aria-hidden="true">
+      <div style="width:26px;height:26px;border-radius:50%;background:var(--vee-navy);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">🌿</div>
+      <div id="vee-typing-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <!-- Quick replies (shown only at start) -->
+    <div id="vee-quick-replies" aria-label="Suggested questions"></div>
+
+    <!-- Input -->
+    <div id="vee-input-bar">
+      <textarea
+        id="vee-input"
+        rows="1"
+        placeholder="Ask me anything about insurance…"
+        aria-label="Your message"
+        maxlength="600"
+      ></textarea>
+      <button id="vee-send" aria-label="Send message" disabled>
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+          <path d="M15.5 1.5L7.5 9.5M15.5 1.5L10.5 15.5L7.5 9.5L1.5 6.5L15.5 1.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div id="vee-panel-footer">
+      Powered by AI · Always reviewed by a <a href="https://www.vansure.ca" target="_blank" rel="noopener">licensed broker</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  // ── CONFIG — replace with your deployed Cloudflare Worker URL ──
+  const WORKER_URL = 'https://quiet-cloud-59f9.insuredby-siddiqui.workers.dev';
+
+  const QUICK_REPLIES = [
+    'How does Vansure work?',
+    'What life insurance do you offer?',
+    'Do you offer Super Visa insurance?',
+    'Is there a broker fee?',
+  ];
+
+  const GREETING = "Hi! I'm Vee 👋 I'm here to help you find the right insurance coverage for you and your family. What can I help you with today?";
+
+  // ── State ──
+  let messages = [];
+  let isOpen = false;
+  let isLoading = false;
+  let hasShownBadge = false;
+
+  // ── Elements ──
+  const launcher   = document.getElementById('vee-launcher');
+  const panel      = document.getElementById('vee-panel');
+  const msgArea    = document.getElementById('vee-messages');
+  const typingEl   = document.getElementById('vee-typing');
+  const inputEl    = document.getElementById('vee-input');
+  const sendBtn    = document.getElementById('vee-send');
+  const qrArea     = document.getElementById('vee-quick-replies');
+  const badge      = document.getElementById('vee-badge');
+
+  // ── Init ──
+  function init() {
+    buildQuickReplies();
+    // Show badge after 3s to draw attention
+    setTimeout(() => {
+      if (!isOpen && !hasShownBadge) {
+        badge.classList.add('show');
+        hasShownBadge = true;
+      }
+    }, 3000);
+  }
+
+  function buildQuickReplies() {
+    qrArea.innerHTML = '';
+    QUICK_REPLIES.forEach(text => {
+      const btn = document.createElement('button');
+      btn.className = 'vee-qr';
+      btn.textContent = text;
+      btn.addEventListener('click', () => {
+        qrArea.innerHTML = '';
+        sendMessage(text);
+      });
+      qrArea.appendChild(btn);
+    });
+  }
+
+  // ── Toggle panel ──
+  launcher.addEventListener('click', () => {
+    isOpen = !isOpen;
+    launcher.classList.toggle('open', isOpen);
+    panel.classList.toggle('open', isOpen);
+    launcher.setAttribute('aria-expanded', String(isOpen));
+    panel.setAttribute('aria-hidden', String(!isOpen));
+    badge.classList.remove('show');
+
+    if (isOpen && messages.length === 0) {
+      appendMessage('bot', GREETING);
+      inputEl.focus();
+    }
+    if (isOpen) inputEl.focus();
+  });
+
+  // ── Input handling ──
+  inputEl.addEventListener('input', () => {
+    sendBtn.disabled = inputEl.value.trim().length === 0 || isLoading;
+    // Auto-resize
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+  });
+
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (!sendBtn.disabled) handleSend();
+    }
+  });
+
+  sendBtn.addEventListener('click', handleSend);
+
+  function handleSend() {
+    const text = inputEl.value.trim();
+    if (!text || isLoading) return;
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+    qrArea.innerHTML = '';
+    sendMessage(text);
+  }
+
+  // ── Send message & get reply ──
+  async function sendMessage(text) {
+    appendMessage('user', text);
+    messages.push({ role: 'user', content: text });
+
+    isLoading = true;
+    sendBtn.disabled = true;
+    showTyping(true);
+    scrollToBottom();
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages }),
+      });
+
+      if (!res.ok) throw new Error('Network error');
+      const data = await res.json();
+      const reply = data.reply || "Sorry, I hit a snag — please try again or reach us at (778) 892-7800.";
+
+      messages.push({ role: 'assistant', content: reply });
+      showTyping(false);
+      appendMessage('bot', reply);
+
+    } catch (err) {
+      showTyping(false);
+      appendMessage('bot', "Sorry, I'm having trouble connecting right now. You can reach a Vansure broker at (778) 892-7800 or info@vansure.ca.");
+    } finally {
+      isLoading = false;
+      sendBtn.disabled = inputEl.value.trim().length === 0;
+    }
+  }
+
+  // ── DOM helpers ──
+  function appendMessage(role, text) {
+    const wrap = document.createElement('div');
+    wrap.className = `vee-msg ${role}`;
+
+    if (role === 'bot') {
+      const av = document.createElement('div');
+      av.className = 'vee-msg-avatar';
+      av.textContent = '🌿';
+      av.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(av);
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = 'vee-bubble';
+    // Linkify URLs in bot messages
+    bubble.innerHTML = role === 'bot' ? linkify(escapeHtml(text)) : escapeHtml(text);
+
+    wrap.appendChild(bubble);
+    msgArea.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  function showTyping(show) {
+    typingEl.classList.toggle('show', show);
+    if (show) scrollToBottom();
+  }
+
+  function scrollToBottom() {
+    requestAnimationFrame(() => {
+      msgArea.scrollTop = msgArea.scrollHeight;
+    });
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/\n/g, '<br>');
+  }
+
+  function linkify(str) {
+    return str.replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener" style="color:var(--vee-navy);text-underline-offset:2px;">$1</a>'
+    );
+  }
+
+  init();
+})();
+</script>
+</footer>
