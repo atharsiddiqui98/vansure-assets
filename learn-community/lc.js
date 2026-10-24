@@ -336,7 +336,7 @@
     }
     function done(state) {
       busy = false; btn.disabled = false; btn.removeAttribute('aria-busy');
-      track('ask_form_result', { form_type: type, topic: type === 'question' ? F('topic').value : type, result: state });
+      track('ask_form_result', { form_type: type, result: state });
       if (state === 'confirmed') { form.reset(); ref = newRef(); started = false; }
     }
     function poll(t0, n) {
