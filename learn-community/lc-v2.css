@@ -152,6 +152,9 @@
 .vlc-learn .pa:has([data-vlc-path=protecting-a-young-family])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A59D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 00-3-3.9'/%3E%3Cpath d='M16 3.1a4 4 0 010 7.8'/%3E%3C/svg%3E")}
 .vlc-learn .pa:has([data-vlc-path=new-to-canada])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A59D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E")}
 .vlc-learn .pa .tag{margin-top:0}
+/* Align the Start this path buttons along the bottom of equal-height cards */
+.vlc-learn .pa>.steps{margin-bottom:24px}
+.vlc-learn .pa>.steps+.btn{margin-top:auto}
 /* Guide cards: the whole card is one link; give it a clear keyboard focus ring */
 .vlc-learn a.gd:focus{outline:none}
 .vlc-learn a.gd:focus-visible{outline:3px solid var(--v2-teal);outline-offset:3px;border-color:rgba(0,165,157,.45)}
