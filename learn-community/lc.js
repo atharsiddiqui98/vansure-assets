@@ -334,6 +334,8 @@
       banner.textContent = extra || txt(state);
       banner.focus();
     }
+    // Turnstile tokens work once. Any send that reached the spam check uses it up, so get a new one.
+    function freshCheck() { if (w.turnstile) try { w.turnstile.reset(); } catch (x) {} }
     function done(state) {
       busy = false; btn.disabled = false; btn.removeAttribute('aria-busy');
       track('ask_form_result', { form_type: type, result: state });
@@ -353,8 +355,11 @@
       e.preventDefault(); if (busy) return;
       if (!check()) return;
       if (!ep) { banner.className = 'banner pend'; banner.textContent = 'Preview only: sending is turned off on this copy of the page.'; banner.focus(); return; }
+      var tokenEl = form.querySelector('[name="cf-turnstile-response"]'), tsEl = $('.cf-turnstile', form), expired = false;
+      if (w.turnstile && tsEl) try { expired = w.turnstile.isExpired(tsEl) === true; } catch (x) {}
+      if (expired) freshCheck();
+      if (w.turnstile && (expired || !(tokenEl && tokenEl.value))) { banner.className = 'banner pend'; banner.textContent = 'One moment, we’re running a quick spam check. Please send again in a few seconds.'; banner.focus(); return; }
       busy = true; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); banner.className = 'banner'; banner.textContent = '';
-      var tokenEl = form.querySelector('[name="cf-turnstile-response"]');
       var c = FORMS[type];
       var body = { reference: ref, form_type: type, topic: c.topic || F('topic').value, first_name: F('first_name').value.trim(), email: F('email').value.trim(),
         message: F('message').value.trim(), business_name: type === 'nomination' ? F('business_name').value.trim() : undefined, event_link: type === 'event' ? F('event_link').value.trim() : undefined,
@@ -365,13 +370,14 @@
         .then(function (r) { clearTimeout(to); return r.json().then(function (j) { return { code: r.status, j: j }; }, function () { return { code: r.status, j: {} }; }); })
         .then(function (res) {
           var st = res.j.state;
+          if (res.code !== 422) freshCheck(); // a 422 is rejected before the spam check, so its token is still unused
           if (res.code === 422 && res.j.errors) { res.j.errors.forEach(function (n) { err(n); }); F(res.j.errors[0]) && F(res.j.errors[0]).focus(); busy = false; btn.disabled = false; btn.removeAttribute('aria-busy'); return; }
           if (res.code === 429) { say('failed', 'You’ve sent several messages in a short time. Please wait a few minutes and try again.'); done('failed'); return; }
           if (st === 'confirmed') { say('confirmed'); done('confirmed'); return; }
-          if (st === 'failed') { say('failed'); done('failed'); ref = newRef(); if (w.turnstile) try { w.turnstile.reset(); } catch (x) {} return; }
+          if (st === 'failed') { say('failed'); done('failed'); ref = newRef(); return; }
           say('uncertain'); poll(Date.now(), 0);
         })
-        .catch(function () { clearTimeout(to); say('uncertain'); poll(Date.now(), 0); }); // network/timeout: never claim failure
+        .catch(function () { clearTimeout(to); freshCheck(); say('uncertain'); poll(Date.now(), 0); }); // network/timeout: never claim failure; keep the reference so a resend can't duplicate
     });
   }
 
