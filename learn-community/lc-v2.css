@@ -167,6 +167,7 @@
 @media (max-width:640px){
 .vlc-learn .vp2-hero .vp2-hg{gap:22px}
 .vlc-learn .vp2-hero .topics{margin-top:18px}
+.vlc-learn .vp2-hero .topics a{min-height:42px}
 .vlc-learn .vp2-hero .vp2-stage{max-width:198px}
 .vlc-learn .pa:has([data-vlc-path])::before{width:42px;height:42px;border-radius:12px;margin-bottom:14px;background-size:20px 20px}
 .vlc-learn .vx>div:not(.w-embed){padding:22px 18px;border-radius:20px}
