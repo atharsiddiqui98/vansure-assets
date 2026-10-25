@@ -5,11 +5,11 @@
 
 /* Page order: hero, learning paths, guides (+ glossary), calculators, next step */
 .vlc-learn{display:flex;flex-direction:column;--v2-ink:#0D1B2A;--v2-navy:#20334C;--v2-teal:#00A59D;--v2-teal-d:#007A74;--v2-muted:#6F7A8C;--v2-tint:#F5F7FB;--v2-line:rgba(32,51,76,.08);--v2-shadow:0 2px 12px rgba(0,0,0,.05);--v2-lift:0 22px 44px -18px rgba(10,31,53,.28)}
-.vlc-learn>.w-embed:first-child{order:0}
+.vlc-learn>.w-embed:has([data-x=hero]){order:0}
 .vlc-learn>[data-x=paths-sec]{order:1}
 .vlc-learn>[data-x=guides-sec]{order:2}
 .vlc-learn>[data-x=vee-sec]{order:3}
-.vlc-learn>.w-embed:last-child{order:4}
+.vlc-learn>.w-embed:has([data-x=calc-sec]){order:4}
 .vlc-learn>[data-x=start-sec]{display:none}
 
 /* Shared rhythm for the native sections */
@@ -80,10 +80,10 @@
 .vlc-learn [data-x=vee-sec]::before,.vlc-learn [data-x=vee-sec]::after{display:none}
 .vlc-learn .vx{display:block}
 .vlc-learn .vx .tvw,.vlc-learn .vx>.w-embed{display:none}
-.vlc-learn .vx>div:not(.w-embed){display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px 48px;align-items:start;background:#fff;border:1px solid var(--v2-line);border-radius:28px;padding:40px;box-shadow:var(--v2-shadow)}
+.vlc-learn .vx>div:not(.w-embed){display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto auto 1fr;gap:0 48px;align-items:start;background:#fff;border:1px solid var(--v2-line);border-radius:28px;padding:40px;box-shadow:var(--v2-shadow)}
 .vlc-learn .vx .eye{grid-column:1;color:var(--v2-teal);display:flex;align-items:center;gap:10px}
 .vlc-learn .vx .eye::before{content:'';width:34px;height:34px;flex:none;border-radius:50%;background:#E9F6F4 url("https://cdn.jsdelivr.net/gh/atharsiddiqui98/vansure-assets@8dd8c23acecd1c7f00e776a61835032d942da217/img/learn/teacher-vee-crop-240.webp") center/cover no-repeat}
-.vlc-learn .vx h2{grid-column:1;color:var(--v2-navy);font-size:clamp(24px,2.4vw,32px)}
+.vlc-learn .vx h2{grid-column:1;margin-top:14px;color:var(--v2-navy);font-size:clamp(24px,2.4vw,32px)}
 .vlc-learn .vx .sub{grid-column:1;color:var(--v2-muted);margin-top:10px}
 .vlc-learn .vx .con{grid-column:2;grid-row:1/span 3;margin:0;padding:0;background:none;border:0;box-shadow:none}
 .vlc-learn .tabs{display:flex;flex-wrap:wrap;gap:8px}
