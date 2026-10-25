@@ -155,6 +155,7 @@
 /* Align the Start this path buttons along the bottom of equal-height cards */
 .vlc-learn .pa>.steps{margin-bottom:24px}
 .vlc-learn .pa>.steps+.btn{margin-top:auto}
+@media (max-width:960px){.vlc-learn .pa>.steps{margin-bottom:0}.vlc-learn .pa>.steps+.btn{margin-top:22px}}
 /* Guide cards: the whole card is one link; give it a clear keyboard focus ring */
 .vlc-learn a.gd:focus{outline:none}
 .vlc-learn a.gd:focus-visible{outline:3px solid var(--v2-teal);outline-offset:3px;border-color:rgba(0,165,157,.45)}
