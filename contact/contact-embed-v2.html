@@ -226,6 +226,12 @@
           <label class="vs-form-label" for="vcf-message">Message <span style="font-weight:400;color:#6F7A8C">(optional)</span></label>
           <textarea class="vs-form-textarea" id="vcf-message" placeholder="Tell us a little about what you're looking for..."></textarea>
         </div>
+        <div class="vs-form-group vs-form-consent">
+          <label class="vs-form-check" for="vcf-consent">
+            <input type="checkbox" id="vcf-consent" required>
+            <span>I agree to the collection and use of my information to respond to my inquiry, as described in the <a href="/privacy">Privacy Policy</a>.</span>
+          </label>
+        </div>
         <!-- Spam protection: a field people never see, and Cloudflare Turnstile, which only appears if it needs a click. -->
         <div class="vs-form-hp" aria-hidden="true"><label for="vcf-company">Company website</label><input type="text" id="vcf-company" tabindex="-1" autocomplete="off"></div>
         <div class="cf-turnstile vs-form-turnstile" data-sitekey="0x4AAAAAAFk26bqmPeQRVJQj" data-appearance="interaction-only" data-size="flexible"></div>
@@ -258,6 +264,12 @@
 .vs-form-status:focus { outline: none; }
 .vs-form-input[aria-invalid="true"], .vs-form-select[aria-invalid="true"], .vs-form-textarea[aria-invalid="true"] { border-color: var(--vs-navy); box-shadow: 0 0 0 3px rgba(32,51,76,.1); }
 .vs-form-submit:disabled { cursor: default; opacity: .75; transform: none; }
+.vs-form-consent { margin-bottom: 0; }
+.vs-form-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: .82rem !important; line-height: 1.55; color: var(--vs-body) !important; font-family: "Poppins", sans-serif !important; }
+.vs-form-check input { flex-shrink: 0; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--vs-teal); cursor: pointer; }
+.vs-form-check input:focus-visible { outline: 2px solid var(--vs-teal); outline-offset: 2px; }
+.vs-form-check input[aria-invalid="true"] { outline: 2px solid var(--vs-navy); outline-offset: 2px; }
+.vs-form-check a { color: var(--vs-teal) !important; text-decoration: underline; }
 .vs-form-success:focus { outline: none; }
 </style>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -293,8 +305,8 @@
   function newRef() { var a = new Uint8Array(10); crypto.getRandomValues(a); var s = 'VQ-'; for (var i = 0; i < 10; i++) s += RCHARS[a[i] % 32]; return s; }
   var ref = newRef();
 
-  var FIELDS = { first_name: 'vcf-first', last_name: 'vcf-last', email: 'vcf-email', phone: 'vcf-phone', product: 'vcf-product', message: 'vcf-message' };
-  var NAMES = { first_name: 'first name', last_name: 'last name', email: 'email address (like name@example.com)', phone: 'phone number', product: 'what we can help with', message: 'message (2,000 characters at most)' };
+  var FIELDS = { first_name: 'vcf-first', last_name: 'vcf-last', email: 'vcf-email', phone: 'vcf-phone', product: 'vcf-product', message: 'vcf-message', consent: 'vcf-consent', consent_version: 'vcf-consent' };
+  var NAMES = { first_name: 'first name', last_name: 'last name', email: 'email address (like name@example.com)', phone: 'phone number', product: 'what we can help with', message: 'message (2,000 characters at most)', consent: 'consent box (please tick it)', consent_version: 'consent box (please tick it)' };
   var MSG = {
     sending: 'Sending your message…',
     failed: 'We couldn’t confirm your message was received. Please try again or contact us directly.',
@@ -310,7 +322,8 @@
   function clearErrors() { form.querySelectorAll('[aria-invalid]').forEach(function (x) { x.removeAttribute('aria-invalid'); }); }
   function markBad(names) {
     names.forEach(function (n) { var el = FIELDS[n] && document.getElementById(FIELDS[n]); if (el) el.setAttribute('aria-invalid', 'true'); });
-    say('Please check your ' + names.map(function (n) { return NAMES[n] || n; }).join(', ') + '.', true);
+    var shown = []; names.forEach(function (n) { var t = NAMES[n] || n; if (shown.indexOf(t) < 0) shown.push(t); });
+    say('Please check your ' + shown.join(', ') + '.', true);
     var first = FIELDS[names[0]] && document.getElementById(FIELDS[names[0]]); if (first) first.focus();
   }
   function check() {
@@ -320,6 +333,7 @@
     var em = val('vcf-email'); if (!/^[^\s@]{1,64}@[^\s@]+\.[^\s@]{2,}$/.test(em) || em.length > 100) bad.push('email');
     var ph = val('vcf-phone'); if (ph && !/^[0-9+().\-\s]{7,30}$/.test(ph)) bad.push('phone');
     if (val('vcf-message').length > 2000) bad.push('message');
+    if (!document.getElementById('vcf-consent').checked) bad.push('consent');
     return bad;
   }
   // Turnstile tokens work once: get a new one after any send that reached the spam check.
@@ -350,7 +364,8 @@
     if (!w.turnstile || expired || !(tokenEl && tokenEl.value)) { say(MSG.spam, false); return; }
     setBusy(true); say(MSG.sending, false);
     var body = { reference: ref, form_type: 'contact', first_name: val('vcf-first'), last_name: val('vcf-last'), email: val('vcf-email'), phone: val('vcf-phone'),
-      product: document.getElementById('vcf-product').value || '', message: val('vcf-message'), hp: document.getElementById('vcf-company').value, turnstile_token: tokenEl.value };
+      product: document.getElementById('vcf-product').value || '', message: val('vcf-message'), consent: document.getElementById('vcf-consent').checked === true, consent_version: 'contact-v1',
+      hp: document.getElementById('vcf-company').value, turnstile_token: tokenEl.value };
     var ctl = new AbortController(); var to = setTimeout(function () { ctl.abort(); }, 15000);
     fetch(ep, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), credentials: 'omit', signal: ctl.signal })
       .then(function (r) { clearTimeout(to); return r.json().then(function (j) { return { code: r.status, j: j }; }, function () { return { code: r.status, j: {} }; }); })

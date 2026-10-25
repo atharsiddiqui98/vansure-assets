@@ -25,7 +25,7 @@ function page(server, { token = 'tok-1' } = {}) {
   // Turnstile's widget puts its token in a hidden input inside the container.
   const ts = d.querySelector('.cf-turnstile'); const inp = d.createElement('input'); inp.type = 'hidden'; inp.name = 'cf-turnstile-response'; inp.value = token; ts.appendChild(inp);
   const $ = (id) => d.getElementById(id);
-  const fill = (v = {}) => { const f = { 'vcf-first': 'Jane', 'vcf-last': 'Smith', 'vcf-email': 'jane@example.com', 'vcf-phone': '604 000 0000', 'vcf-message': 'Term life please', ...v }; for (const k in f) $(k).value = f[k]; $('vcf-product').value = v.product ?? 'Life'; };
+  const fill = (v = {}) => { const f = { 'vcf-first': 'Jane', 'vcf-last': 'Smith', 'vcf-email': 'jane@example.com', 'vcf-phone': '604 000 0000', 'vcf-message': 'Term life please', ...v }; for (const k in f) if (k.startsWith('vcf-')) $(k).value = f[k]; $('vcf-product').value = v.product ?? 'Life'; $('vcf-consent').checked = v.consent ?? true; };
   const send = () => d.getElementById('vsContactForm').dispatchEvent(new w.Event('submit', { cancelable: true, bubbles: true }));
   const view = () => ({ success: $('vsContactSuccess').style.display === 'block', formShown: $('vsContactForm').style.display !== 'none', status: $('vsContactStatus').hidden ? '' : $('vsContactStatus').textContent,
     bad: $('vsContactStatus').classList.contains('is-bad'), btn: d.querySelector('.vs-form-submit').textContent.trim(), disabled: d.querySelector('.vs-form-submit').disabled,
@@ -46,7 +46,8 @@ const ok = (name) => { results.push(name); };
   const v = p.view(); assert.equal(v.success, true); assert.equal(v.formShown, false);
   assert.equal(p.d.querySelector('#vsContactSuccess h3').textContent, 'Message sent!'); assert.equal(p.d.querySelector('#vsContactSuccess p').textContent, 'We’ll be in touch soon.');
   const b = p.posts[0];
-  assert.deepEqual(Object.keys(b).sort(), ['email', 'first_name', 'form_type', 'hp', 'last_name', 'message', 'phone', 'product', 'reference', 'turnstile_token']);
+  assert.deepEqual(Object.keys(b).sort(), ['consent', 'consent_version', 'email', 'first_name', 'form_type', 'hp', 'last_name', 'message', 'phone', 'product', 'reference', 'turnstile_token']);
+  assert.equal(b.consent, true); assert.equal(b.consent_version, 'contact-v1');
   assert.equal(b.form_type, 'contact'); assert.match(b.reference, /^VQ-[A-HJ-NP-Z2-9]{10}$/); assert.equal(b.product, 'Life'); assert.equal(b.turnstile_token, 'tok-1'); assert.equal(b.hp, '');
   assert.equal(p.resets(), 1, 'fresh spam check after the send');
   ok('valid submission: pending text, then confirmed success; correct payload'); }
@@ -61,6 +62,23 @@ const ok = (name) => { results.push(name); };
   v = p.view(); assert.deepEqual(v.invalid.sort(), ['vcf-email', 'vcf-first']); assert.equal(p.d.activeElement.id, 'vcf-first');
   p.fill({ 'vcf-phone': 'call me' }); p.send(); await tick(); assert.deepEqual(p.view().invalid, ['vcf-phone']);
   ok('invalid email / missing fields / bad phone: inline errors, nothing sent'); }
+
+// 2b. Consent box: unchecked by default, required, labelled, keyboard reachable, links the Privacy Policy.
+{ const p = page({ post: () => { throw new Error('must not send'); } });
+  const box = p.$('vcf-consent');
+  assert.equal(box.checked, false, 'unchecked by default'); assert.equal(box.type, 'checkbox'); assert.equal(box.required, true);
+  assert.equal(box.tabIndex, 0, 'reachable with Tab'); assert.equal(box.labels.length, 1, 'has a label');
+  assert.equal(box.labels[0].textContent.trim().replace(/\s+/g, ' '), 'I agree to the collection and use of my information to respond to my inquiry, as described in the Privacy Policy.');
+  assert.equal(box.labels[0].querySelector('a').getAttribute('href'), '/privacy');
+  assert.ok(!/market|newsletter|offer|promot/i.test(box.labels[0].textContent), 'no marketing consent implied');
+  p.fill({ consent: false }); p.send(); await tick();
+  const v = p.view(); assert.deepEqual(v.invalid, ['vcf-consent']); assert.match(v.status, /consent box/); assert.equal(p.posts.length, 0);
+  assert.equal(p.d.activeElement.id, 'vcf-consent', 'focus moves to the box');
+  ok('consent box: unchecked by default, required, labelled, keyboard reachable, Privacy Policy link, nothing sent unticked'); }
+// 2c. The server refusing consent marks the box once.
+{ const p = page({ post: () => json(422, { state: 'failed', errors: ['consent', 'consent_version'] }) });
+  p.fill(); p.send(); await tick(); const v = p.view(); assert.deepEqual(v.invalid, ['vcf-consent']); assert.equal((v.status.match(/consent box/g) || []).length, 1);
+  ok('server consent refusal: box marked, named once'); }
 
 // 4. Double-click → one submission.
 { let release; const p = page({ post: () => new Promise((r) => { release = () => r({ status: 200, json: async () => ({ state: 'confirmed' }) }); }) });
