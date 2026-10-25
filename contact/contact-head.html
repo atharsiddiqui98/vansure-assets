@@ -1,0 +1,157 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   VANSURE — CONTACT PAGE CSS
+   Paste into: Webflow > Pages > Contact > Custom Code > <head>
+============================================================ */
+
+:root {
+  --vs-teal:        #00A59D;
+  --vs-teal-dark:   #0F9D94;
+  --vs-navy:        #20334C;
+  --vs-bg:          #F5F7FB;
+  --vs-text:        #122033;
+  --vs-body:        #4B5563;
+  --vs-muted:       #6F7A8C;
+  --vs-line:        rgba(32,51,76,.13);
+  --vs-shadow-soft: 0 18px 45px rgba(7,27,53,.12);
+  --vs-shadow-card: 0 2px 12px rgba(0,0,0,.06);
+  --vs-ease:        cubic-bezier(.25,.46,.45,.94);
+  --vs-r-xl:        32px;
+  --vs-r-lg:        20px;
+  --vs-r-md:        14px;
+}
+
+/* ── CONTACT HERO ── */
+.vs-contact-hero {
+  position: relative; overflow: hidden; border-radius: 0 0 40px 40px;
+  background: radial-gradient(circle at 100% 0%, #00c4b7 0%, #00a59d 32%, #0f9d94 65%, #0b7a77 100%);
+  background-size: 200% 200%; animation: vsHeroShimmer 8s ease-in-out infinite;
+  color: #fff; padding: 80px 24px 96px; text-align: center;
+}
+@keyframes vsHeroShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.vs-contact-hero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 5; }
+.vs-contact-hero-badge {
+  display: inline-flex; align-items: center; gap: .45rem; padding: .3rem 1rem; border-radius: 999px;
+  background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.3);
+  font-size: .72rem !important; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
+  color: rgba(255,255,255,.95) !important; margin-bottom: 24px;
+  animation: vsSlideUp .6s var(--vs-ease) both;
+}
+.vs-contact-hero h1,
+.vs-contact-hero h1.heading,
+.vs-contact-hero .w-richtext h1 {
+  font-size: clamp(2.6rem, 4.5vw, 3.6rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.01em !important;
+  color: #fff !important;
+  margin: 0 0 20px !important;
+  font-family: "Poppins", sans-serif !important;
+  animation: vsSlideUp .65s .08s var(--vs-ease) both;
+}
+.vs-contact-hero p,
+.vs-contact-hero p.paragraph {
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+  color: rgba(237,245,255,.88) !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  font-family: "Poppins", sans-serif !important;
+  animation: vsSlideUp .65s .16s var(--vs-ease) both;
+}
+
+/* ── CONTACT INFO CARDS ── */
+.vs-contact-info-section { background: var(--vs-bg); padding: 72px 24px 0; }
+.vs-contact-info-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.vs-contact-info-card {
+  background: #fff; border-radius: var(--vs-r-lg); padding: 28px 24px;
+  border: 1.5px solid rgba(0,0,0,.06); box-shadow: var(--vs-shadow-card);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  transition: box-shadow .25s ease, transform .22s var(--vs-ease), border-color .25s ease;
+}
+.vs-contact-info-card:hover { border-color: rgba(0,165,157,.2); box-shadow: 0 12px 40px rgba(0,165,157,.12); transform: translateY(-4px); }
+.vs-contact-info-icon { width: 48px; height: 48px; border-radius: 999px; background: rgba(0,165,157,.08); border: 1px solid rgba(0,165,157,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
+.vs-contact-info-icon svg { width: 22px; height: 22px; color: var(--vs-teal); }
+.vs-contact-info-label { font-size: .72rem !important; font-weight: 600 !important; letter-spacing: .1em; text-transform: uppercase; color: var(--vs-muted) !important; font-family: "Poppins", sans-serif !important; }
+.vs-contact-info-value { font-size: 1rem !important; font-weight: 600 !important; color: var(--vs-navy) !important; text-decoration: none; transition: color .18s ease; font-family: "Poppins", sans-serif !important; }
+.vs-contact-info-value:hover { color: var(--vs-teal) !important; }
+.vs-contact-info-sub { font-size: .82rem !important; color: var(--vs-body) !important; line-height: 1.5; font-family: "Poppins", sans-serif !important; }
+
+/* ── CONTACT FORM ── */
+.vs-contact-form-section { background: var(--vs-bg); padding: 56px 24px 88px; }
+.vs-contact-form-wrap { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+.vs-contact-form-left { position: sticky; top: 32px; }
+.vs-contact-form-eyebrow { font-size: .72rem !important; font-weight: 600 !important; letter-spacing: .13em; text-transform: uppercase; color: var(--vs-teal) !important; display: block; margin-bottom: 12px; font-family: "Poppins", sans-serif !important; }
+.vs-contact-form-left h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem) !important; font-weight: 700 !important; line-height: 1.2 !important; color: var(--vs-navy) !important; margin: 0 0 16px !important; font-family: "Poppins", sans-serif !important; }
+.vs-contact-form-left p { font-size: .95rem !important; line-height: 1.75 !important; color: var(--vs-body) !important; margin: 0 0 32px !important; font-family: "Poppins", sans-serif !important; }
+.vs-contact-promise-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.vs-contact-promise-item { display: flex; align-items: flex-start; gap: 12px; font-size: .88rem !important; color: var(--vs-body) !important; line-height: 1.5; font-family: "Poppins", sans-serif !important; }
+.vs-contact-promise-check { width: 22px; height: 22px; border-radius: 999px; background: var(--vs-teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.vs-contact-promise-check svg { width: 11px; height: 11px; color: #fff; }
+
+/* ── FORM CARD ── */
+.vs-contact-form-card { background: #fff; border-radius: var(--vs-r-xl); padding: 36px 32px; box-shadow: var(--vs-shadow-soft); border: 1.5px solid rgba(0,0,0,.05); }
+.vs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.vs-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.vs-form-label { font-size: .78rem !important; font-weight: 600 !important; color: var(--vs-navy) !important; letter-spacing: .02em; font-family: "Poppins", sans-serif !important; }
+.vs-form-input,
+.vs-form-select,
+.vs-form-textarea {
+  width: 100%; padding: 12px 16px; border-radius: var(--vs-r-md);
+  border: 1.5px solid rgba(32,51,76,.14);
+  font-family: "Poppins", sans-serif !important;
+  font-size: .88rem !important; color: var(--vs-text);
+  background: #fff; transition: border-color .2s ease, box-shadow .2s ease;
+  outline: none; appearance: none; -webkit-appearance: none;
+}
+.vs-form-input:focus, .vs-form-select:focus, .vs-form-textarea:focus { border-color: var(--vs-teal); box-shadow: 0 0 0 3px rgba(0,165,157,.1); }
+.vs-form-input::placeholder, .vs-form-textarea::placeholder { color: #adb5bd; }
+.vs-form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.vs-form-select-wrap { position: relative; }
+.vs-form-select-wrap::after { content: ''; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--vs-muted); pointer-events: none; }
+.vs-form-select { padding-right: 36px; cursor: pointer; }
+.vs-form-submit {
+  width: 100%; margin-top: 24px; padding: 15px 28px; border-radius: 999px;
+  background: var(--vs-teal); color: #fff !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem !important; font-weight: 600 !important;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,165,157,.26);
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.vs-form-submit:hover { background: var(--vs-navy); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(32,51,76,.28); }
+.vs-form-note { font-size: .75rem !important; color: var(--vs-muted) !important; text-align: center; margin-top: 14px; line-height: 1.5; font-family: "Poppins", sans-serif !important; }
+.vs-form-success { display: none; text-align: center; padding: 40px 20px; }
+.vs-form-success-icon { width: 64px; height: 64px; border-radius: 999px; background: rgba(0,165,157,.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.vs-form-success-icon svg { width: 28px; height: 28px; color: var(--vs-teal); }
+.vs-form-success h3 { font-size: 1.3rem !important; font-weight: 700 !important; color: var(--vs-navy) !important; margin: 0 0 10px !important; font-family: "Poppins", sans-serif !important; }
+.vs-form-success p { font-size: .9rem !important; color: var(--vs-body) !important; line-height: 1.7 !important; font-family: "Poppins", sans-serif !important; }
+
+/* ── SCROLL REVEAL ── */
+.vs-reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s var(--vs-ease), transform .55s var(--vs-ease); }
+.vs-reveal.vs-from-left { transform: translateX(-28px); }
+.vs-reveal.vs-from-right { transform: translateX(28px); }
+.vs-reveal.vs-visible { opacity: 1; transform: translateY(0) translateX(0); }
+
+/* ── KEYFRAMES ── */
+@keyframes vsSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991px) {
+  .vs-contact-info-grid { grid-template-columns: 1fr; }
+  .vs-contact-form-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .vs-contact-form-left { position: static; }
+}
+@media (max-width: 600px) {
+  .vs-contact-hero { padding: 56px 20px 72px; }
+  .vs-contact-form-card { padding: 24px 20px; }
+  .vs-form-row { grid-template-columns: 1fr; }
+  .vs-contact-info-section { padding: 48px 20px 0; }
+  .vs-contact-form-section { padding: 40px 20px 72px; }
+}
+</style>
