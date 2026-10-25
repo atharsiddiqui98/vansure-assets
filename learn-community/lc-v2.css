@@ -5,11 +5,11 @@
 
 /* Page order: hero, learning paths, guides (+ glossary), calculators, next step */
 .vlc-learn{display:flex;flex-direction:column;--v2-ink:#0D1B2A;--v2-navy:#20334C;--v2-teal:#00A59D;--v2-teal-d:#007A74;--v2-muted:#6F7A8C;--v2-tint:#F5F7FB;--v2-line:rgba(32,51,76,.08);--v2-shadow:0 2px 12px rgba(0,0,0,.05);--v2-lift:0 22px 44px -18px rgba(10,31,53,.28)}
-.vlc-learn>.w-embed:has([data-x=hero]){order:0}
+.vlc-learn .vlc-v2:has([data-x=hero]){order:0}
 .vlc-learn>[data-x=paths-sec]{order:1}
 .vlc-learn>[data-x=guides-sec]{order:2}
 .vlc-learn>[data-x=vee-sec]{order:3}
-.vlc-learn>.w-embed:has([data-x=calc-sec]){order:4}
+.vlc-learn .vlc-v2:has([data-x=calc-sec]),.vlc-learn>.w-embed:has([data-x=calc-sec]){order:4}
 .vlc-learn>[data-x=start-sec]{display:none}
 
 /* Shared rhythm for the native sections */
