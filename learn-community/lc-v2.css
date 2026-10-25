@@ -145,3 +145,31 @@
 .vlc-learn .vlc-calc .vp2-card{padding:22px 20px}
 }
 @media (prefers-reduced-motion:reduce){.vlc-learn .pa,.vlc-learn .gd,.vlc-learn .chip,.vlc-learn .tab,.vlc-learn .vlc-cl a::after{transition:none!important}.vlc-learn .pa:hover,.vlc-learn .gd:hover{transform:none}}
+
+/* Final polish (staging): path icons from the vp2 icon set, so each journey reads at a glance */
+.vlc-learn .pa:has([data-vlc-path])::before{content:'';display:block;flex:none;width:48px;height:48px;margin-bottom:18px;border-radius:14px;background:#E9F6F4 center/22px 22px no-repeat}
+.vlc-learn .pa:has([data-vlc-path=buying-your-first-home])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A59D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E")}
+.vlc-learn .pa:has([data-vlc-path=protecting-a-young-family])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A59D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 00-3-3.9'/%3E%3Cpath d='M16 3.1a4 4 0 010 7.8'/%3E%3C/svg%3E")}
+.vlc-learn .pa:has([data-vlc-path=new-to-canada])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A59D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E")}
+.vlc-learn .pa .tag{margin-top:0}
+/* Guide cards: the whole card is one link; give it a clear keyboard focus ring */
+.vlc-learn a.gd:focus{outline:none}
+.vlc-learn a.gd:focus-visible{outline:3px solid var(--v2-teal);outline-offset:3px;border-color:rgba(0,165,157,.45)}
+.vlc-learn a.gd:hover h3,.vlc-learn a.gd:focus-visible h3{color:var(--v2-teal-d)}
+/* Glossary: a lighter supporting panel so the guides stay the focus */
+.vlc-learn .vx>div:not(.w-embed){background:rgba(255,255,255,.55);box-shadow:none;border:1px solid rgba(32,51,76,.10);border-radius:24px;padding:32px 36px}
+.vlc-learn .vx h2{font-size:clamp(20px,2vw,26px);margin-top:12px}
+.vlc-learn .vx .sub{font-size:15px}
+.vlc-learn .tab{min-height:40px;padding:0 16px;font-size:14px}
+.vlc-learn .def{padding:18px 20px;border-radius:16px}
+.vlc-learn .def b{font-size:18px}
+.vlc-learn .def p{font-size:15px}
+@media (max-width:640px){
+.vlc-learn .vp2-hero .vp2-hg{gap:22px}
+.vlc-learn .vp2-hero .topics{margin-top:18px}
+.vlc-learn .vp2-hero .vp2-stage{max-width:198px}
+.vlc-learn .pa:has([data-vlc-path])::before{width:42px;height:42px;border-radius:12px;margin-bottom:14px;background-size:20px 20px}
+.vlc-learn .vx>div:not(.w-embed){padding:22px 18px;border-radius:20px}
+.vlc-learn .tab{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){.vlc-learn a.gd:hover h3{transition:none}}
